@@ -6,12 +6,12 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useNavigate } from 'react-router';
 // import { useDispatch } from 'react-redux';
 // import { signupUser } from '../../store/actions/user_actions';
-import image from '../../assets/images/NHIF_Official_Logo.png'
+import image from '../../assets/images/clinton.png'
 import NavBar from '../containers/header';
 import SideNav from '../sideBar/sideNav';
 
 const schema = Yup.object({
-    firstName: Yup
+    productName: Yup
     .string()
     .required()
     .trim(),
@@ -19,30 +19,25 @@ const schema = Yup.object({
     // .string()
     // .required()
     // .trim(),
-    lastName: Yup
+    buyingPrice: Yup
     .string()
     .required()
     .trim(),
-    card_type: Yup
+    whole_sale: Yup
     .string()
     .required()
     .trim(),
-    gender: Yup
+    sellingPrice: Yup
     .string()
     .required()
     .trim(),
-    dob: Yup
+    quantity : Yup
     .string()
     .required()
     .trim(),
-    telephone : Yup
+    supplier: Yup
     .string()
     .required()
-    .trim(),
-    email: Yup
-    .string()
-    .required()
-    .email()
     .trim(),
 })
 
@@ -71,12 +66,12 @@ function NewRequest() {
     useEffect(() => {
         if (isSubmitSuccessful) {
             reset({
-                firstName: '',
+                productName: '',
                 // middleName: '',
-                lastName: '',
+                buyingPrice: '',
                 dob: '',
-                telephone: '',
-                email: '',
+                quantity: '',
+                supplier: '',
                 password: '',
                 confirmPassword : '',
                 card_type : ''
@@ -97,101 +92,71 @@ function NewRequest() {
                                  <img src={image} alt="" className='h-32 w-32' />
                             </div>             
                           <div className="p-2">
-                              <p className="text-center text-3xl font-bold mb-4 text-sky-600">Request Card</p>
+                              <p className="text-center text-3xl font-bold mb-4 text-sky-600 -mt-4">Add New Product</p>
                               <form onSubmit={handleSubmit(onSubmit)} className="py-2 px-1">
                             <div className="grid grid-cols-2 gap-1 w-full mx-auto mb-3">
                                       <div className="w-10/12 xsm:w-full sm:w-11/12 mx-auto">
-                                    <label htmlFor="Firstname" className='text-sky-600'>Firstname</label> <br />
-                                          <input type="text" placeholder='Firstname'
-                                           className={`rounded-md w-11/12 border-2 focus:outline-none px-2 xl:py-2 lg:py-2 md:py-2 py-1 ${ errors.firstName? "border-red-500" : "border-sky-500" }  `}
+                                    <label htmlFor="productName" className='text-sky-600'>Product Name</label> <br />
+                                          <input type="text" placeholder='productName'
+                                           className={`rounded-md w-11/12 border-2 focus:outline-none px-2 xl:py-2 lg:py-2 md:py-2 py-1 ${ errors.productName? "border-red-500" : "border-sky-500" }  `}
                                            defaultValue={""}
-                                           {...register("firstName")}
+                                           {...register("productName")}
                                      />
                                           <span className="text-red-500 text-sm">{ errors.firstName?.message }</span>
                                 </div>
                                 <div className="w-10/12 xsm:w-full sm:w-11/12 mx-auto">
-                              <label htmlFor="Lastname" className='text-sky-600'>Lastname</label> <br />
-                                    <input type="text" placeholder='Lastname'
-                                     className={`rounded-md w-11/12 border-2 focus:outline-none px-2 xl:py-2 lg:py-2 md:py-2 py-1 ${errors.lastName? "border-red-500" : "border-sky-500"} `}
+                              <label htmlFor="buyingPrice" className='text-sky-600'>Buying Price</label> <br />
+                                    <input type="text" placeholder='buyingPrice'
+                                     className={`rounded-md w-11/12 border-2 focus:outline-none px-2 xl:py-2 lg:py-2 md:py-2 py-1 ${errors.buyingPrice? "border-red-500" : "border-sky-500"} `}
                                      defaultValue={""}
-                                     {...register("lastName")}
+                                     {...register("buyingPrice")}
                                />
-                                    <span className="text-red-500 text-sm">{ errors.lastName?.message }</span>
+                                    <span className="text-red-500 text-sm">{ errors.buyingPrice?.message }</span>
                           </div>
                             </div>
                             <div className="grid grid-cols-2 gap-1 w-full mx-auto mb-3">
 
                             <div className="w-10/12 xsm:w-full sm:w-11/12 mx-auto">
-                              <label htmlFor="Lastname" className='text-sky-600'>Date of Birth</label> <br />
-                                    <input type="date" 
-                                     className={`rounded-md w-11/12 border-2 focus:outline-none px-2 xl:py-2 lg:py-2 md:py-2 py-1 ${errors.dob? "border-red-500" : "border-sky-500"} `}
+                              <label htmlFor="Lastname" className='text-sky-600'>Whole Sale</label> <br />
+                                    <input type="text" placeholder='Enter whole sale price' 
+                                     className={`rounded-md w-11/12 border-2 focus:outline-none px-2 xl:py-2 lg:py-2 md:py-2 py-1 ${errors.whole_sale? "border-red-500" : "border-sky-500"} `}
                                      defaultValue={""}
-                                     {...register("dob")}
+                                     {...register("whole_sale")}
                                />
-                                    <span className="text-red-500 text-sm">{ errors.dob?.message }</span>
+                                    <span className="text-red-500 text-sm">{ errors.whole_sale?.message }</span>
                           </div>
 
-                                <div className="mx-auto w-11/12 mb-1  ml-3">
-                                    <label className='ml-2 text-sky-600' htmlFor="Gender">Gender </label> <br />
-                                    <input className='ml-2' type="radio" checked  name='gender' value={"Male"} placeholder='gender' 
-                                    //  defaultValue={""}
-                                     {...register("gender")}
-                                    /> Male
-                                    <input type="radio"  name='gender' value={"Female"} placeholder='gender' 
-                                    className='ml-3'
-                                    //  defaultValue={""}
-                                     {...register("gender")}
-                                    /> Female <br />
-                                     
+                          <div className="w-10/12 xsm:w-full sm:w-11/12 mx-auto">
+                                    <label htmlFor="sellingPrice" className='text-sky-600'>Selling Price</label> <br />
+                                          <input type="tel" placeholder='sellingPrice'
+                                           className={`rounded-md w-11/12 border-2 focus:outline-none px-2 xl:py-2 lg:py-2 md:py-2 py-1 ${errors.sellingPrice?"border-red-500" : "border-sky-500"}`}
+                                           defaultValue={""}
+                                           {...register("sellingPrice")}
+                                     />
+                                          <span className="text-red-500 text-sm">{ errors.sellingPrice?.message }</span>
                                 </div>
                             </div>
                             <div className="grid grid-cols-2 gap-1 w-full mx-auto mb-3">
                                       <div className="w-10/12 xsm:w-full sm:w-11/12 mx-auto">
-                                    <label htmlFor="Telephone" className='text-sky-600'>Telephone</label> <br />
-                                          <input type="tel" placeholder='Telephone'
-                                           className={`rounded-md w-11/12 border-2 focus:outline-none px-2 xl:py-2 lg:py-2 md:py-2 py-1 ${errors.telephone?"border-red-500" : "border-sky-500"}`}
+                                    <label htmlFor="quantity" className='text-sky-600'>Quantity</label> <br />
+                                          <input type="tel" placeholder='quantity'
+                                           className={`rounded-md w-11/12 border-2 focus:outline-none px-2 xl:py-2 lg:py-2 md:py-2 py-1 ${errors.quantity?"border-red-500" : "border-sky-500"}`}
                                            defaultValue={""}
-                                           {...register("telephone")}
+                                           {...register("quantity")}
                                      />
-                                          <span className="text-red-500 text-sm">{ errors.telephone?.message }</span>
+                                          <span className="text-red-500 text-sm">{ errors.quantity?.message }</span>
                                 </div>
                                 <div className="w-10/12 xsm:w-full sm:w-11/12 mx-auto">
-                                    <label htmlFor="Email Address" className='text-sky-600'>Email Address</label> <br />
-                                    <input type="text" placeholder='Email Address' 
-                                              className={`rounded-md border-2 w-11/12 focus:outline-none px-2 xl:py-2 lg:py-2 md:py-2 py-1 ${errors.email?"border-red-500" : "border-sky-500"} `}
+                                    <label htmlFor="supplier Address" className='text-sky-600'>Supplier</label> <br />
+                                    <input type="text" placeholder='supplier ' 
+                                              className={`rounded-md border-2 w-11/12 focus:outline-none px-2 xl:py-2 lg:py-2 md:py-2 py-1 ${errors.supplier?"border-red-500" : "border-sky-500"} `}
                                      defaultValue={""}
-                                     {...register("email")}
+                                     {...register("supplier")}
                                     />
-                                    <span className="text-red-500 text-sm">{ errors.email?.message }</span>
+                                    <span className="text-red-500 text-sm">{ errors.supplier?.message }</span>
                                 </div>
                             </div>
-                            <div className="grid grid-cols-2 gap-1 w-full mx-auto mb-3">
-                            <div className="w-10/12 xsm:w-full sm:w-11/12 mx-auto">
-                              <label htmlFor="Lastname" className='text-sky-600'>Card Type</label> <br />
-                                    <select name="" id=""
-                                    className={`rounded-md w-11/12 border-2 focus:outline-none px-2 xl:py-2 lg:py-2 md:py-2 py-1 ${errors.card_type? "border-red-500" : "border-sky-500"} `}
-                                    defaultValue={""}
-                                    {...register("card_type")}
-                                    >
-                                        <option value="">Select Card Type</option>
-                                        <option value="Student card">Student Card</option>
-                                        <option value="Children card">Children Card</option>
-                                        <option value="Employee card">Employee Card</option>
-                                    </select>
-                                    <span className="text-red-500 text-sm">{ errors.card_type?.message }</span>
-                          </div>
-                          <div className="w-10/12 xsm:w-full sm:w-11/12 mx-auto">
-                              <label htmlFor="Lastname" className='text-sky-600'>Upload Photo</label> <br />
-                                <input type="file" placeholder='Event date' 
-                                          className={`rounded-md w-11/12 border-2 focus:outline-none px-2 xl:py-2 lg:py-2 md:py-2 py-1 ${errors.lastName? "border-red-500" : "border-sky-500"} `}
-                                          required
-                                          onChange={(e) => setFile(e.target.files[0])}
-                                    //  defaultValue={""}
-                                    //  {...register("lastName")}
-                                   />
-                                    {/* <span className="text-red-500 text-sm">{ errors.lastName?.message }</span> */}
-                          </div>
-                            </div>
+                            
                             <div className="mx-auto w-9/12 py-4">            
                                   <button disabled={!isValid || !isDirty} style={{ width: '80%'}} className="rounded shadow px-2 mx-auto py-1 bg-sky-600 text-white font-medium">Submit</button>
                             </div>

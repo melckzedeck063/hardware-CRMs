@@ -6,8 +6,10 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useNavigate } from 'react-router';
 import { useDispatch } from 'react-redux';
 // import { signupUser } from '../../store/actions/user_actions';
-import image from '../../assets/images/NHIF_Official_Logo.png'
+import image from '../../assets/images/clinton.png'
 import { signUpUser } from '../../store/actions/user_actions';
+import SideNav from '../sideBar/sideNav';
+import NavBar from '../containers/header';
 
 const schema = Yup.object({
     firstName: Yup
@@ -86,7 +88,10 @@ function SignupUser() {
     })
   return (
       <>
-          <div>
+          <div className="flex w-full">
+        <SideNav/>
+       <div className='w-full bg-white'>
+          <NavBar  />
               {/* <NavBar /> */}
               <div className="bg-slate-50 py-10">
                   <div className="mx-auto w-11/12 lg:w-6/12 xl:w-6/12">
@@ -184,18 +189,19 @@ function SignupUser() {
                                 </div>
                             </div>
                             <div className="mx-auto w-9/12 py-4">            
-                                  <button disabled={!isValid || !isDirty} style={{ width: '80%'}} className="rounded shadow px-2 mx-auto py-1 bg-sky-600 text-white font-medium">Sign Up</button>
+                                  <button disabled={!isValid || !isDirty} style={{ width: '80%'}} className="rounded shadow px-2 mx-auto py-1 bg-sky-600 text-white font-medium">Submit</button>
                             </div>
-                            <div className="py-3">
+                            {/* <div className="py-3">
                                 <p className="font-medium mb-3 text-center text-sky-600">Already have an account?</p>
                                 <div className="w-5/12  md:w-1/4 lg:w-1/4 xl:w-1/4 mx-auto mb-4 pb-8">       
                                     <button onClick={() => navigate('/')} className="rounded-md text-center border-2 text-sky-600 border-sky-600 hover:bg-sky-600 hover:shadow-xl hover:text-white font-medium shadow-m px-4 py-1">Sign In</button>
                                 </div>
-                            </div>
+                            </div> */}
                               </form>
                           </div>
                       </div>
                   </div>
+              </div>
               </div>
         </div>
       </>

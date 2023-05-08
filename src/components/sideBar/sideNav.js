@@ -13,7 +13,7 @@ import * as FaIcons from 'react-icons/fa';
 import * as GiIcons from 'react-icons/gi';
 import * as FiIcons  from 'react-icons/fi';
 
-import image from '../../assets/images/NHIF_Official_Logo.png'
+import image from '../../assets/images/clinton.png'
 import { AuthContext } from '../../context';
 
 function SideNav() {
@@ -50,17 +50,17 @@ function SideNav() {
         <div className='shadow-3xl sticky top-0 z-40'>
           <div className={`pt-4 p-3 h-screen  bg-sky-600 backdrop-blur-sm ${open ? "w-44 xl:w-52 lg:w-52 duration-300" : "w-14 duration-300"}  text-gray-800 relative`}>
             <BsIcons.BsArrowLeft onClick={() => setOpen(!open)} className={`bg-white duration-300 text-slate-800 hover:font-bold hover:cursor-pointer rounded-full border border-cool-teal p-1 text-3xl absolute right-0.5 top-1 ${!open && "rotate-180"} `} />
-            <div className="inline-flex mb-3 py-2 -ml-1 mt-2 space-x-2">
-               <div className="h-12 w-12 mx-auto">
-                 <img src={image} alt="" className={`${open? 'h-14 w-20 -mt-1' : 'h-10  w-12 mt-2 -ml-1'}`} />
+            <div className="inline-flexx mb-3 py-2 -ml-1 mt-2 space-x-2 border-b border-slate-200 ">
+               <div className="w-32 mx-auto my-2 py-1 ">
+                 <img src={image} alt="" className={`${open? 'h-20 w-32 -mt-1' : 'h-10  w-12 mt-2 -ml-1'}`} />
                 </div> 
               {/* <GiIcons.GiFarmTractor className={`bg-white ${!open ? "text-3xl font-medium ml-1 mt-1.5" : "text-4xl -ml-1"} rounded text-slate-700 cursor-pointer block float-left mr-2 ${open && "rotate-[360deg]"} duration-500`} /> */}
-              <h1 className={`text-2xl mt-3 text-white font-bold origin-left ${!open && "scale-0"}`}>NHIF</h1>
+            
             </div>
-            <div className={`bg-light-white -ml-1 rounded-md flex items-center py-1 ${open ? "px-3" : "px-1"}`}>
+            {/* <div className={`bg-light-white -ml-1 rounded-md flex items-center py-1 ${open ? "px-3" : "px-1"}`}>
               <BiIcons.BiSearch className={`font-bold text-xl text-white cursor-pointer block float-left ${open && "mr-1 text-lg"} ${!open && "text-2xl"}`} />
               <input type="search" placeholder='Search' className={`text-gray-100 text-base bg-transparent w-full focus:outline-none ${!open && "hidden"}`} />
-            </div>
+            </div> */}
             <ul className="pt-1">
 
               <li className={`text-gray-800 py-2.5 space-x-1 text-sm hover:px-1  cursor-pointer hover:bg-light-white hover:text-gray-800 rounded-md mt-2`}>
@@ -77,7 +77,7 @@ function SideNav() {
                   <span className='text-xl block float-left pr-1'>
                     <AiIcons.AiOutlineOrderedList />
                   </span>
-                  <span className={`text-base flex-1 font-lightt ${!open && "hidden"}`}> Requests </span>
+                  <span className={`text-base flex-1 font-lightt ${!open && "hidden"}`}> Products </span>
                   <IoIcons.IoMdArrowDropup className={`text-xl ${!open && "hidden"} ${!subVendors && "rotate-180"}`} onClick={() => setSubVendors(!subVendors)} />
                 </Link>
               </li>
@@ -85,13 +85,11 @@ function SideNav() {
                 subVendors && open && (
                   <ul>
                     <li className="text-gray-800 p-2 px-3 space-x-2 text-sm flex items-center cursor-pointer hover:bg-light-white rounded-md ">
-                      <Link style={{ textDecoration: "none" }} to='/requests' className="no-underline hover:text-white text-gray-100"> All Requests </Link>
+                      <Link style={{ textDecoration: "none" }} to='/products' className="no-underline hover:text-white text-gray-100"> All Products </Link>
                     </li>
+
                     <li className="text-gray-800 p-2 px-3 space-x-2 text-sm flex items-center cursor-pointer hover:bg-light-white rounded-md ">
-                      <Link style={{ textDecoration: "none" }} to='/pending_requests' className="no-underline hover:text-white text-gray-100">Pending Requests </Link>
-                    </li>
-                    <li className="text-gray-800 p-2 px-3 space-x-2 text-sm flex items-center cursor-pointer hover:bg-light-white rounded-md ">
-                      <Link style={{ textDecoration: "none" }} to='/new_request' className="no-underline hover:text-white text-gray-100"> New Request </Link>
+                      <Link style={{ textDecoration: "none" }} to='/new_product' className="no-underline hover:text-white text-gray-100"> New Products </Link>
                     </li>
                   </ul>
                 )
@@ -99,12 +97,12 @@ function SideNav() {
 
 
 
-              <li className={`text-gray-800 py-2.5 space-x-1 text-sm hover:px-1  cursor-pointer hover:bg-light-white hover:text-gray-800 rounded-md mt-2`}>
+              {/* <li className={`text-gray-800 py-2.5 space-x-1 text-sm hover:px-1  cursor-pointer hover:bg-light-white hover:text-gray-800 rounded-md mt-2`}>
                 <Link style={{ textDecoration: "none" }} to='#' className="flex items-center hover:text-white no-underline text-gray-100 ">
                   <span className='text-xl block float-left pr-1'>
                     <AiIcons.AiOutlineOrderedList />
                   </span>
-                  <span className={`text-base flex-1 font-lightt ${!open && "hidden"}`}> Dependants </span>
+                  <span className={`text-base flex-1 font-lightt ${!open && "hidden"}`}> Sales </span>
                   <IoIcons.IoMdArrowDropup className={`text-xl ${!open && "hidden"} ${!subOrders && "rotate-180"}`} onClick={() => setSubOrders(!subOrders)} />
                 </Link>
               </li>
@@ -120,7 +118,7 @@ function SideNav() {
                     
                   </ul>
                 )
-              }
+              } */}
 
               {/* <li className={`text-gray-800 py-2.5 space-x-1 text-sm hover:px-1  cursor-pointer hover:bg-light-white hover:text-gray-800 rounded-md mt-2`}>
                 <Link style={{ textDecoration: "none" }} to='#' className="flex items-center hover:text-white no-underline text-gray-100 ">
@@ -200,6 +198,16 @@ function SideNav() {
                 )
               } */}
 
+              <li className={`text-gray-800 py-2.5 space-x-1 text-sm  cursor-pointer hover:bg-light-white hover:text-gray-800 hover:px-1 rounded-md mt-2`}>
+                <Link style={{ textDecoration: "none" }} to='#' className="flex items-center hover:text-white no-underline text-gray-100 ">
+                  <span className='text-xl block float-left pr-1'>
+                    <SiIcons.SiSimpleanalytics />
+                  </span>
+                  <span className={`text-base flex-1 ml-0.5 font-lightt ${!open && "hidden"}`}> Sales</span>
+
+                </Link>
+              </li>
+
               <li className={`text-gray-800 py-2.5 space-x-1 text-sm hover:px-1  cursor-pointer hover:bg-light-white hover:text-gray-800 rounded-md mt-2 ${userRole !== "ADMIN" && "hidden"}`}>
                 <Link style={{ textDecoration: "none" }} to='#' className="flex items-center hover:text-white no-underline text-gray-100 ">
                   <span className='text-xl block float-left pr-1'>
@@ -213,10 +221,10 @@ function SideNav() {
                 subMenuOpen && open && (
                   <ul>
                     <li className="text-gray-800 p-2 px-3 space-x-2 text-sm flex items-center cursor-pointer hover:bg-light-white rounded-md ">
-                      <Link style={{ textDecoration: "none" }} to='/staffs' className="no-underline hover:text-white text-gray-100"> Staffs</Link>
+                      <Link style={{ textDecoration: "none" }} to='/customers' className="no-underline hover:text-white text-gray-100"> All Users</Link>
                     </li>
                     <li className="text-gray-800 p-2 px-3 space-x-2 text-sm flex items-center cursor-pointer hover:bg-light-white rounded-md ">
-                      <Link style={{ textDecoration: "none" }} to='/customers' className="no-underline hover:text-white text-gray-100"> Customers</Link>
+                      <Link style={{ textDecoration: "none" }} to='/register' className="no-underline hover:text-white text-gray-100"> Add User</Link>
                     </li>
                     {/* <li className="text-gray-800 p-2 px-3 space-x-2 text-sm flex items-center cursor-pointer hover:bg-light-white rounded-md ">
                       <Link style={{ textDecoration: "none" }} to='#' className="no-underline hover:text-white text-gray-100"> My Company Inactive Users </Link>
@@ -236,17 +244,17 @@ function SideNav() {
               </li> */}
               
               <li className={`text-gray-800 py-2.5 space-x-1 text-sm  cursor-pointer hover:bg-light-white hover:text-gray-800 hover:px-1 rounded-md mt-2`}>
-                <Link style={{ textDecoration: "none" }} to='/reports' className="flex items-center hover:text-white no-underline text-gray-100 ">
+                <Link style={{ textDecoration: "none" }} to='#' className="flex items-center hover:text-white no-underline text-gray-100 ">
                   <span className='text-xl block float-left pr-1'>
                     <SiIcons.SiSimpleanalytics />
                   </span>
-                  <span className={`text-base flex-1 ml-0.5 font-lightt ${!open && "hidden"}`}> Verification </span>
+                  <span className={`text-base flex-1 ml-0.5 font-lightt ${!open && "hidden"}`}> Reports </span>
 
                 </Link>
               </li>
 
               <li className={`text-gray-800 py-2.5 space-x-1 text-sm hover:px-1  cursor-pointer hover:bg-light-white hover:text-gray-800 rounded-md mt-2`}>
-                <Link style={{ textDecoration: "none" }} to='/app-settings' className="flex items-center hover:text-white no-underline text-gray-100 ">
+                <Link style={{ textDecoration: "none" }} to='#' className="flex items-center hover:text-white no-underline text-gray-100 ">
                   <span className='text-xl block float-left pr-1'>
                     <AiIcons.AiFillSetting />
                   </span>

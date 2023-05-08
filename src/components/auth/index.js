@@ -8,7 +8,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { AuthContext, AuthProvider } from '../../context'
 // import { signinUser } from '../../store/actions/user_actions'
 import { useDispatch } from 'react-redux';
-import image from '../../assets/images/NHIF_Official_Logo.png'
+import image from '../../assets/images/clinton.png'
 import { signInUser } from '../../store/actions/user_actions';
 
 const schema = Yup.object ({
@@ -86,12 +86,12 @@ function Login() {
                   
                         <div className="w-5/12 lg:w-6/12 xsm:w-11/12 sm:w-9/12 md:w-8/12 mx-auto">
                             <div className="bg-white rounded-md shadow-md hover:shadow-xl"> 
-                            <div className="w-32 h-32 mx-auto">
-                                 <img src={image} alt="" className='h-32 w-32' />
+                            <div className="w-52 h-46 mx-auto -mt-8">
+                                 <img src={image} alt="" className='h-46 w-52' />
                             </div>                              
-                        <form  onSubmit={handleSubmit(onSubmit)} className="mx-auto py-4 px-6 xsm:px-1 sm:px-2 text-slate-800">
+                        <form  onSubmit={handleSubmit(onSubmit)} className="mx-auto py-2 px-6 xsm:px-1 sm:px-2 text-slate-800">
                                     <div className="text-center">
-                                        <h4 className="text-4xl font-bold text-sky-600 py-3">Sign In</h4>
+                                        <h4 className="text-4xl font-bold text-sky-600 py-3 -mt-4">Sign In</h4>
                                     </div>  
                                     <div className="mb-1 pb-3 w-9/12 mx-auto">
                                         <label htmlFor="Username" className="font-medium text-sky-600">Username</label> <br />
@@ -113,15 +113,15 @@ function Login() {
                                   <button type="submit" disabled={!isValid || !isDirty } className="rounded-sm py-1 px-4 text-slate-50 bg-sky-600 hover:shadow-xl font-medium w-9/12 mx-auto">Login</button>
                                 </div>
                            </form>
-                                <div className="mx-auto w-10/12">
+                                <div className="mx-auto w-10/12 py-3">
                                     {/* <div className=" rounded hover: bg-slate-700 text-white">                                        */}
                                     <p onClick={() => navigate('/forget') } className="font-medium animate-pulse cursor-pointer text-sky-600 mb-4 text-center"> Forget your password? </p>
                                     {/* </div> */}
-                                    <p  className="text-slate-500 text-center mb-2">Don't have an account ?</p>
+                                    {/* <p  className="text-slate-500 text-center mb-2">Don't have an account ?</p>
                                 
                                     <div className="w-5/12  md:w-5/12 lg:w-5/12 xl:w-5/12 mx-auto mb-4 pb-8 xl:pl-6 lg:pl-6 md:pl-4">       
                                     <button onClick={() => navigate('/register')} className="rounded-md text-center border-2 border-sky-600 hover:bg-sky-600 hover:shadow-xl hover:text-white font-medium shadow-m px-4 py-1">Sign Up</button>
-                                    </div>
+                                    </div> */}
                                 </div>
                             </div>
                         </div>

@@ -6,40 +6,36 @@ import ReactTable from './component/table_card'
 import * as FaIcons from 'react-icons/fa';
 import * as MdIcons from 'react-icons/md'
 
-export default function AllRequests() {
+export default function AllProducts() {
 
     const columns = [
         {
-          Header: 'FirstName',
-          accessor: 'firstname',
-        },
-        {
-            Header: 'LastName',
-            accessor: 'lastname',
+            Header: 'ProductName',
+            accessor: 'productname',
           },
         {
-          Header: 'Age',
-          accessor: 'age',
+          Header: 'Quantity',
+          accessor: 'quantity',
         },
         {
-          Header: 'Email',
-          accessor: 'email',
+          Header: 'Buying Price',
+          accessor: 'buying_price',
         },
         {
-          Header: 'Phone',
-          accessor: 'phone',
+          Header: 'Whole Sale',
+          accessor: 'whole_sale',
         },
         {
-          Header: 'Address',
-          accessor: 'address',
+          Header: 'Selling Price',
+          accessor: 'selling_price',
         },
         {
-          Header: 'City',
-          accessor: 'city',
+          Header: 'Added By',
+          accessor: 'added_by',
         },
         {
-          Header: 'Country',
-          accessor: 'country',
+          Header: 'Date Added',
+          accessor: 'date_added',
         },
         {
           Header: 'Actions',
@@ -59,24 +55,22 @@ export default function AllRequests() {
 
       const data = [
         {
-          firstname: 'John',
-          lastname: 'Doe',
-          age: 30,
-          email: 'john.doe@example.com',
-          phone: '555-555-5555',
-          address: '123 Main St',
-          city: 'Anytown',
-          country: 'USA',
+          productname: 'Tronic Socket 2 in 1',
+          quantity: 30,
+          buying_price: 9000,
+          whole_sale : 9500,
+          selling_price: 10000,
+          added_by: 'Clinton Solution',
+          date_added: '2023-05-10',
         },
         {
-          firstname: 'Melckzedeck',
-          lastname : 'James',
-          age: 30,
-          email: 'john.doe@example.com',
-          phone: '555-555-5555',
-          address: '123 Main St',
-          city: 'Anytown',
-          country: 'USA',
+          productname: 'Junction 4 way',
+          quantity: 20,
+          buying_price: 3000,
+          whole_sale : 3500,
+          selling_price: 3700,
+          added_by: 'Clinton Solution',
+          date_added: '2023-05-12',
         },
         // add more rows as needed
       ];

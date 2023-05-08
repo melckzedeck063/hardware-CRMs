@@ -5,7 +5,7 @@ import SignupUser from './components/auth/signup';
 import ResetEmail from './components/auth/resetEmail';
 import ResetPassword from './components/auth/resetPassword';
 import Dashboard from './components/admin';
-import AllRequests from './components/admin/all_requests';
+import AllProducts from './components/admin/all_products';
 import NewRequest from './components/admin/request_form';
 import MyDependants from './components/admin/all_dependants';
 import DependantRequest from './components/admin/dependant_request';
@@ -26,9 +26,9 @@ function App() {
              <Route path='/forget' element={ <ResetEmail /> } />
              <Route path='/reset' element={ <ResetPassword /> } />
              <Route path='/dashboard' element={ <ProtectedRoute> <Dashboard/>  </ProtectedRoute> } />
-             <Route path='/requests' element={ <ProtectedRoute>  <AllRequests /> </ProtectedRoute> } />
+             <Route path='/products' element={ <ProtectedRoute>  <AllProducts /> </ProtectedRoute> } />
              <Route path='/pending_requests' element={ <ProtectedRoute>  <PendingRequests/>  </ProtectedRoute> } />
-             <Route path='/new_request' element={ <ProtectedRoute> <NewRequest /> </ProtectedRoute> } />
+             <Route path='/new_product' element={ <ProtectedRoute> <NewRequest /> </ProtectedRoute> } />
              <Route path='/dependants' element={ <ProtectedRoute>  <MyDependants />  </ProtectedRoute> } />
              <Route path='/new_dependant' element={ <ProtectedRoute>  <DependantRequest />  </ProtectedRoute>} />
              <Route path='/staffs' element={<ProtectedRoute>  <AllStaffs /> </ProtectedRoute> } />
