@@ -1,41 +1,73 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import NavBar from '../containers/header'
 import SideNav from '../sideBar/sideNav'
 import ReactTable from './component/table_card'
 
 import * as FaIcons from 'react-icons/fa';
 import * as MdIcons from 'react-icons/md'
+import { useDispatch, useSelector } from 'react-redux';
+import { getAllProducts } from '../../store/actions/product_actions';
+import moment from 'moment';
 
 export default function AllProducts() {
+
+  const [reload, setReload] =   useState(0);
+  const dispatch =  useDispatch();
+
+  const products  =  useSelector(state => state.products);
+
+  // console.log(products.products)
+
+
+  setTimeout(() => {
+    if(reload < 5){
+      setReload(reload  => reload + 1);
+    }
+  }, 1000);
+
+  useEffect(() => {
+     if(products && products.products.length < 1 && reload < 4){
+      dispatch( getAllProducts());
+
+     }
+  })
+
 
     const columns = [
         {
             Header: 'ProductName',
-            accessor: 'productname',
+            accessor: 'productName',
           },
         {
           Header: 'Quantity',
           accessor: 'quantity',
         },
-        {
-          Header: 'Buying Price',
-          accessor: 'buying_price',
-        },
+        // {
+        //   Header: 'Buying Price',
+        //   accessor: 'buyingPrice',
+        // },
         {
           Header: 'Whole Sale',
-          accessor: 'whole_sale',
+          accessor: 'wholeSale',
+        },
+        {
+          Header: 'Member Price',
+          accessor: 'memberPrice',
         },
         {
           Header: 'Selling Price',
-          accessor: 'selling_price',
+          accessor: 'sellingPrice',
         },
         {
           Header: 'Added By',
-          accessor: 'added_by',
+          accessor: 'created_by.email',
+          
         },
+      
         {
           Header: 'Date Added',
-          accessor: 'date_added',
+          accessor: 'date_published',
+          
         },
         {
           Header: 'Actions',
@@ -55,23 +87,15 @@ export default function AllProducts() {
 
       const data = [
         {
-          productname: 'Tronic Socket 2 in 1',
-          quantity: 30,
-          buying_price: 9000,
-          whole_sale : 9500,
-          selling_price: 10000,
-          added_by: 'Clinton Solution',
-          date_added: '2023-05-10',
+          productname: '',
+          quantity: "",
+          buying_price: "",
+          whole_sale : "loading",
+          selling_price: "",
+          added_by: '',
+          date_added: '',
         },
-        {
-          productname: 'Junction 4 way',
-          quantity: 20,
-          buying_price: 3000,
-          whole_sale : 3500,
-          selling_price: 3700,
-          added_by: 'Clinton Solution',
-          date_added: '2023-05-12',
-        },
+        
         // add more rows as needed
       ];
 
@@ -82,10 +106,20 @@ export default function AllProducts() {
        <div className='w-full bg-white'>
           <NavBar  />
           <div className='py-2'>
-            <div className="text-2xl text-sky-600 text-center font-bold">All Requests</div>
+            <div className="text-2xl text-sky-600 text-center font-bold">All Products</div>
+            {
+              products?.products?.data?(
+                <>
+             <div className="w-11/12 mx-auto">
+                <ReactTable cols={columns} data={products.products.data} />
+             </div>
+                </>
+              )
+              :   
             <div className="w-11/12 mx-auto">
                 <ReactTable cols={columns} data={data} />
             </div>
+            }
           </div>
         </div>
      </div>
