@@ -34,10 +34,10 @@ export default function AllProducts() {
      }
   })
 
-  const [items, setItems] =  useState([]);
-  if(products && products.products && items.length === 0){
-    setItems(products.products.data)
-  }
+  // const [items, setItems] =  useState([]);
+  // if(products && products.products && items.length === 0){
+  //   setItems(products.products.data)
+  // }
   const [searchQuery, setSearchQuery] = useState('');
 
   const handleSearchQueryChange = (event) => {
@@ -46,12 +46,12 @@ export default function AllProducts() {
 
   // console.log(searchQuery)
  
-  const filteredItems = items.filter((item) => {
-    const propertiesToSearch = ['productName',"sellingPrice"]; // adjust to the properties you want to search
-    return propertiesToSearch.some((property) =>
-      item[property].toLowerCase().includes(searchQuery.toLowerCase())
-    );
-  });
+  // const filteredItems = items.filter((item) => {
+  //   const propertiesToSearch = ['productName',"sellingPrice"]; // adjust to the properties you want to search
+  //   return propertiesToSearch.some((property) =>
+  //     item[property].toLowerCase().includes(searchQuery.toLowerCase())
+  //   );
+  // });
 
   // console.log(filteredItems)
 
