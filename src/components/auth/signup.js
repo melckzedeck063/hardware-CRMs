@@ -16,10 +16,6 @@ const schema = Yup.object({
     .string()
     .required()
     .trim(),
-    // middleName: Yup
-    // .string()
-    // .required()
-    // .trim(),
     lastName: Yup
     .string()
     .required()
@@ -28,7 +24,7 @@ const schema = Yup.object({
     .string()
     .required()
     .trim(),
-    dob: Yup
+    role: Yup
     .string()
     .required()
     .trim(),
@@ -67,7 +63,7 @@ function SignupUser() {
     })
 
     const onSubmit = data => {
-        console.log(data)
+        // console.log(data)
         dispatch( signUpUser(data) )
     }
 
@@ -78,7 +74,7 @@ function SignupUser() {
                 firstName: '',
                 // middleName: '',
                 lastName: '',
-                dob: '',
+                role: '',
                 telephone: '',
                 email: '',
                 password: '',
@@ -94,7 +90,7 @@ function SignupUser() {
           <NavBar  />
               {/* <NavBar /> */}
               <div className="bg-slate-50 py-10">
-                  <div className="mx-auto w-11/12 lg:w-6/12 xl:w-6/12">
+                  <div className="mx-auto w-11/12 lg:w-8/12 xl:w-8/12">
                       <div className="rounded-md shadow bg-white w-full">  
                       <div className="w-32 h-32 mx-auto">
                                  <img src={image} alt="" className='h-32 w-32' />
@@ -125,13 +121,19 @@ function SignupUser() {
                             <div className="grid grid-cols-2 gap-1 w-full mx-auto mb-3">
 
                             <div className="w-10/12 xsm:w-full sm:w-11/12 mx-auto">
-                              <label htmlFor="Lastname" className='text-sky-600'>Date of Birth</label> <br />
-                                    <input type="date" 
-                                     className={`rounded-md w-11/12 border-2 focus:outline-none px-2 xl:py-2 lg:py-2 md:py-2 py-1 ${errors.dob? "border-red-500" : "border-sky-500"} `}
+                              <label htmlFor="Lastname" className='text-sky-600'>Role</label> <br />
+                                    <select name="" id=""
+                                     className={`rounded-md w-11/12 border-2 focus:outline-none px-2 xl:py-2 lg:py-2 md:py-2 py-1 ${errors.role? "border-red-500" : "border-sky-500"} `}
                                      defaultValue={""}
-                                     {...register("dob")}
-                               />
-                                    <span className="text-red-500 text-sm">{ errors.dob?.message }</span>
+                                     {...register("role")}
+                                    >
+                                        <option value="">Select role</option>
+                                        <option value="user">User</option>
+                                        <option value="staff">Staff</option>
+                                        <option value="admin">Admin</option>
+                                    </select>
+                               
+                                    <span className="text-red-500 text-sm">{ errors.role?.message }</span>
                           </div>
 
                                 <div className="mx-auto w-11/12 mb-1  ml-3">

@@ -59,7 +59,7 @@ function NewRequest() {
     })
 
     const onSubmit = data => {
-        console.log(data)
+        // console.log(data)
         dispatch(createProduct(data) );
     }
 
@@ -92,7 +92,7 @@ function NewRequest() {
                                  <img src={image} alt="" className='h-32 w-32' />
                             </div>             
                           <div className="p-2">
-                              <p className="text-center text-3xl font-bold mb-4 text-sky-600 -mt-4">Add New Product</p>
+                              <p className="text-center text-3xl font-bold mb-4 text-sky-600 -mt-4">Update Product</p>
                               <form onSubmit={handleSubmit(onSubmit)} className="py-2 px-1">
                             <div className="grid grid-cols-2 gap-1 w-full mx-auto mb-3">
                                       <div className="w-10/12 xsm:w-full sm:w-11/12 mx-auto">
