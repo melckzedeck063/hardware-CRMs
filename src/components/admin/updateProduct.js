@@ -42,7 +42,7 @@ const schema = Yup.object({
     .trim(),
 })
 
-function NewRequest() {
+function UpdateProduct() {
 
     const navigate = useNavigate();
     // const [file, setFile] = useState("");
@@ -174,4 +174,4 @@ function NewRequest() {
   )
 }
 
-export default NewRequest
+export default UpdateProduct

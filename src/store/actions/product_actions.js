@@ -21,7 +21,7 @@ PRODUCT_API.interceptors.request.use((req) => {
 export const createProduct =  createAsyncThunk('/new_product', async(values)  => {
       try{
         const response =  await PRODUCT_API.post('/new_product', {
-            productName :  values.productname,
+            productName :  values.productName,
             buyingPrice :   values.buyingPrice,
             wholeSale :  values.wholeSale,
             sellingPrice  :  values.sellingPrice,

@@ -8,11 +8,13 @@ import * as MdIcons from 'react-icons/md'
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllProducts } from '../../store/actions/product_actions';
 import moment from 'moment';
+import { useNavigate } from 'react-router';
 
 export default function AllProducts() {
 
   const [reload, setReload] =   useState(0);
   const dispatch =  useDispatch();
+  const navigate =  useNavigate();
 
   const products  =  useSelector(state => state.products);
 
@@ -32,6 +34,35 @@ export default function AllProducts() {
      }
   })
 
+  const [items, setItems] =  useState([]);
+  if(products && products.products && items.length === 0){
+    setItems(products.products.data)
+  }
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const handleSearchQueryChange = (event) => {
+    setSearchQuery(event.target.value);
+  };
+
+  // console.log(searchQuery)
+ 
+  const filteredItems = items.filter((item) => {
+    const propertiesToSearch = ['productName',"sellingPrice"]; // adjust to the properties you want to search
+    return propertiesToSearch.some((property) =>
+      item[property].toLowerCase().includes(searchQuery.toLowerCase())
+    );
+  });
+
+  // console.log(filteredItems)
+
+  const handleEditClick = (id) => {
+    console.log('Edit button clicked for ID:', id);
+     navigate(`/product/${id}`)
+  };
+
+  const handleDeleteClick = (id) => {
+    console.log('Delete button clicked for ID:', id);
+  };
 
     const columns = [
         {
@@ -60,26 +91,59 @@ export default function AllProducts() {
         },
         {
           Header: 'Added By',
-          accessor: 'created_by.email',
+          accessor: 'created_by.firstName',
+          Cell: ({row}) => (
+            <>
+            {
+              products?.products?.data?(
+              <span className='font-medium capitalize'>  {row.original.created_by.firstName} {row.original.created_by.lastName}</span>
+              )
+              : 
+              <>
+              </>
+            }
+            </>
+          ),
           
         },
       
         {
           Header: 'Date Added',
           accessor: 'date_published',
+          Cell: ({row}) => (
+            <>
+            {
+              products?.products?.data?(
+              <div> {moment(row.original.date_published).format('MMMM Do YYYY')} </div>
+              )
+              : 
+              <>
+              </>
+            }
+            </>
+          ),
           
         },
         {
           Header: 'Actions',
-          accessor: 'actions',
-          Cell: () => (
+          accessor: '_id',
+          Cell: ({row}) => (
             <>
-              <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold px-2 rounded mr-2">
+            {
+              products?.products?.data?(
+                <>
+              <button onClick={() => handleEditClick(row.original._id)} className="bg-blue-500 hover:bg-blue-700 text-white font-bold px-2 rounded mr-2">
                  <FaIcons.FaEdit className='font-2xl text-white m-1'  />
               </button>
               <button className="bg-red-500 hover:bg-red-700 text-white font-bold px-2 rounded">
-                  <MdIcons.MdDelete className='font-2xl text-white m-1'  />
+                  <MdIcons.MdDelete className='font-2xl text-white m-1' />
               </button>
+                </>
+              )
+              : 
+              <>
+              </>
+            }
             </>
           ),
         },
@@ -90,7 +154,7 @@ export default function AllProducts() {
           productname: '',
           quantity: "",
           buying_price: "",
-          whole_sale : "loading",
+          wholeSale : "Loading",
           selling_price: "",
           added_by: '',
           date_added: '',
@@ -107,6 +171,15 @@ export default function AllProducts() {
           <NavBar  />
           <div className='py-2'>
             <div className="text-2xl text-sky-600 text-center font-bold">All Products</div>
+            {/* search item  */}
+               <div className={`rounded-md flex  mt-2 bg-transparent border-2 border-slate-400 py-1 h-8 px-3 w-5/12 mx-auto mr-10 `}>
+                        <MdIcons.MdSearch className='text-slate-600 mt-0.5 text-lg' />
+                        <input type="text" className='focus:outline-none px-1 py-1'
+                         placeholder='Search by name'
+                         value={searchQuery} onChange={handleSearchQueryChange}
+                        />
+                </div>
+
             {
               products?.products?.data?(
                 <>
