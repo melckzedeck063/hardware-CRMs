@@ -15,6 +15,7 @@ import AllCustomers from './components/admin/all_customers';
 import { AuthProvider } from './context';
 import ProtectedRoute from './context/protect'
 import UpdateProduct from './components/admin/updateProduct';
+import UpdateUser from './components/admin/updateUser';
 
 function App() {
   return (
@@ -23,7 +24,7 @@ function App() {
           <AuthProvider>
           <Routes>
              <Route  path='/' element={ <Login  /> } />
-             <Route  path='/register' element={ <SignupUser /> } />
+             <Route  path='/register' element={ <ProtectedRoute> <SignupUser /> </ProtectedRoute> } />
              <Route path='/forget' element={ <ResetEmail /> } />
              <Route path='/reset' element={ <ResetPassword /> } />
              <Route path='/dashboard' element={ <ProtectedRoute> <Dashboard/>  </ProtectedRoute> } />
@@ -35,6 +36,7 @@ function App() {
              <Route path='/new_dependant' element={ <ProtectedRoute>  <DependantRequest />  </ProtectedRoute>} />
              <Route path='/staffs' element={<ProtectedRoute>  <AllStaffs /> </ProtectedRoute> } />
              <Route path='/customers' element={ <ProtectedRoute>  <AllCustomers />  </ProtectedRoute>} />
+             <Route  path='/customer/:id' element={ <ProtectedRoute> <UpdateUser/> </ProtectedRoute> } />
           </Routes>
           </AuthProvider>
        </BrowserRouter>

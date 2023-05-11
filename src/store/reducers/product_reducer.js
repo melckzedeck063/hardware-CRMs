@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { createProduct, getAllProducts, getProductById } from "../actions/product_actions";
+import { createProduct, getAllProducts, getProductById, updateProduct } from "../actions/product_actions";
 
 
 export const productSlice =  createSlice({
@@ -60,6 +60,19 @@ export const productSlice =  createSlice({
             state.current_product = action.payload
         })
         .addCase(getProductById.rejected, (state,action) => {
+            state.status = "Failed";
+            state.message = "Request  failed please try again";
+            state.error = action.error.message;
+        })
+        .addCase(updateProduct.pending,(state) => {
+            state.status = "Loading"
+        })
+        .addCase(updateProduct.fulfilled, (state,action) => {
+            state.status = "Successfull";
+            state.message = "product updated succesfull";
+            state.current_product = action.payload
+        })
+        .addCase(updateProduct.rejected, (state,action) => {
             state.status = "Failed";
             state.message = "Request  failed please try again";
             state.error = action.error.message;

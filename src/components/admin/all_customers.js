@@ -7,11 +7,14 @@ import * as FaIcons from 'react-icons/fa';
 import * as MdIcons from 'react-icons/md'
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllCustomers } from '../../store/actions/user_actions';
+import { useNavigate} from 'react-router';
 
 export default function AllCustomers() {
 
   const [renders, setRenders] =  useState(0);
   const dispatch = useDispatch();
+  const navigate =  useNavigate();
+
 
 
   const customers  =  useSelector(state  => state.users);
@@ -28,6 +31,16 @@ export default function AllCustomers() {
        dispatch( getAllCustomers() )
     }
   })
+
+  const handleEditClick = (id) => {
+    console.log('Edit button clicked for ID:', id);
+     navigate(`/customer/${id}`)
+  };
+
+  const handleDeleteClick = (id) => {
+    console.log('Delete button clicked for ID:', id);
+  };
+
 
     const columns = [
         {
@@ -55,9 +68,9 @@ export default function AllCustomers() {
         {
           Header: 'Actions',
           accessor: 'actions',
-          Cell: () => (
+          Cell: ({row}) => (
             <>
-              <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold px-2 rounded mr-2">
+              <button onClick={() => handleEditClick(row.original._id) } className="bg-blue-500 hover:bg-blue-700 text-white font-bold px-2 rounded mr-2">
                  <FaIcons.FaEdit className='font-2xl text-white m-1'  />
               </button>
               <button className="bg-red-500 hover:bg-red-700 text-white font-bold px-2 rounded">
@@ -95,7 +108,7 @@ export default function AllCustomers() {
           <div className='py-2'>
             <div className="text-2xl text-sky-600 text-center font-bold">Our Customers</div>
             {
-              customers.users?.data?.data ?(
+              customers.users?.data?.data?(
               <div className="w-11/12 mx-auto">
                 <ReactTable cols={columns} data={customers.users.data.data} />
             </div>

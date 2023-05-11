@@ -29,7 +29,7 @@ export const createProduct =  createAsyncThunk('/new_product', async(values)  =>
             quantity :  values.quantity
         });
 
-        console.log(response.data);
+        // console.log(response.data);
         return response.data;
 
       }
@@ -57,8 +57,29 @@ export const getProductById =   createAsyncThunk('/product', async(id) => {
     try{
         const response = await  PRODUCT_API.get(`/product/${id}`);
 
-        console.log(response.data);
+        // console.log(response.data);
         return response.data
+    }
+    catch(error){
+        console.log(error);
+        return error.message;
+    }
+})
+
+export const updateProduct =  createAsyncThunk('/update', async (values,id)  => {
+    // console.log(id)
+    try{
+        const  response = await PRODUCT_API.patch(`/update_product/${values.id}`, {
+            productName :  values.productName,
+            buyingPrice :   values.buyingPrice,
+            wholeSale :  values.wholeSale,
+            sellingPrice  :  values.sellingPrice,
+            memberPrice :  values.memberPrice,
+            quantity :  values.quantity
+        });
+
+        console.log(response.data);
+        return response.data;
     }
     catch(error){
         console.log(error);
