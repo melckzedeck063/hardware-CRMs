@@ -16,6 +16,8 @@ import { AuthProvider } from './context';
 import ProtectedRoute from './context/protect'
 import UpdateProduct from './components/admin/updateProduct';
 import UpdateUser from './components/admin/updateUser';
+import CartPage from './components/admin/cart_page';
+import SaleProduct from './components/admin/sale_page';
 
 function App() {
   return (
@@ -32,6 +34,8 @@ function App() {
              <Route path='/pending_requests' element={ <ProtectedRoute>  <PendingRequests/>  </ProtectedRoute> } />
              <Route path='/new_product' element={ <ProtectedRoute> <NewRequest /> </ProtectedRoute> } />
              <Route path='/product/:id' element={ <ProtectedRoute> <UpdateProduct /> </ProtectedRoute> } />
+             <Route path='/sale_product/:id' element={ <ProtectedRoute> <SaleProduct /> </ProtectedRoute> } />
+             <Route path='/cart' element={ <ProtectedRoute> <CartPage /> </ProtectedRoute> } />
              <Route path='/dependants' element={ <ProtectedRoute>  <MyDependants />  </ProtectedRoute> } />
              <Route path='/new_dependant' element={ <ProtectedRoute>  <DependantRequest />  </ProtectedRoute>} />
              <Route path='/staffs' element={<ProtectedRoute>  <AllStaffs /> </ProtectedRoute> } />

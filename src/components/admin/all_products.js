@@ -5,6 +5,8 @@ import ReactTable from './component/table_card'
 
 import * as FaIcons from 'react-icons/fa';
 import * as MdIcons from 'react-icons/md'
+import * as BiIcons from 'react-icons/bi';
+
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllProducts } from '../../store/actions/product_actions';
 import moment from 'moment';
@@ -58,6 +60,11 @@ export default function AllProducts() {
   const handleEditClick = (id) => {
     console.log('Edit button clicked for ID:', id);
      navigate(`/product/${id}`)
+  };
+
+  const handleSalesClick = (id) => {
+    console.log('sale button clicked for ID:', id);
+     navigate(`/sale_product/${id}`);
   };
 
   const handleDeleteClick = (id) => {
@@ -134,6 +141,9 @@ export default function AllProducts() {
                 <>
               <button onClick={() => handleEditClick(row.original._id)} className="bg-blue-500 hover:bg-blue-700 text-white font-bold px-2 rounded mr-2">
                  <FaIcons.FaEdit className='font-2xl text-white m-1'  />
+              </button>
+              <button onClick={() => handleSalesClick(row.original._id)} className="bg-amber-400 hover:bg-amber-500 text-white font-bold px-2 rounded mr-2">
+                 <BiIcons.BiPurchaseTag className='font-2xl text-white m-1  rotate-90'  />
               </button>
               <button className="bg-red-500 hover:bg-red-700 text-white font-bold px-2 rounded">
                   <MdIcons.MdDelete className='font-2xl text-white m-1' />
