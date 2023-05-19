@@ -97,6 +97,10 @@ export default function AllProducts() {
           accessor: 'sellingPrice',
         },
         {
+          Header: 'Units',
+          accessor: 'unit',
+        },
+        {
           Header: 'Added By',
           accessor: 'created_by.firstName',
           Cell: ({row}) => (

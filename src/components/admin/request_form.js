@@ -36,6 +36,10 @@ const schema = Yup.object({
     .string()
     .required()
     .trim(),
+    unit : Yup
+    .string()
+    .required()
+    .trim(),
     memberPrice: Yup
     .string()
     .required()
@@ -74,6 +78,7 @@ function NewRequest() {
                 quantity: '',
                 sellingPrice: '',
                 memberPrice: '',
+                unit : ''
 
 
             })
@@ -155,6 +160,28 @@ function NewRequest() {
                                            {...register("quantity")}
                                      />
                                           <span className="text-red-500 text-sm">{ errors.quantity?.message }</span>
+                                </div>
+                                
+                            </div>
+                            <div className="grid grid-cols-2 gap-1 w-full mx-auto mb-3">
+                            <div className="w-10/12 xsm:w-full sm:w-11/12 mx-auto">
+                                    <label htmlFor="supplier Address" className='text-sky-600'>Units</label> <br />
+                                    <input type="text" placeholder='units ' 
+                                              className={`rounded-md border-2 w-11/12 focus:outline-none px-2 xl:py-2 lg:py-2 md:py-2 py-1 ${errors.unit?"border-red-500" : "border-sky-500"} `}
+                                     defaultValue={""}
+                                     {...register("unit")}
+                                    />
+                                    <span className="text-red-500 text-sm">{ errors.unit?.message }</span>
+                                </div>
+
+                                      <div className="w-10/12 xsm:w-full sm:w-11/12 mx-auto">
+                                    <label htmlFor="quantity" className='text-sky-600'>Supplier</label> <br />
+                                          <input type="tel" placeholder='supplier'
+                                           className={`rounded-md w-11/12 border-2 focus:outline-none px-2 xl:py-2 lg:py-2 md:py-2 py-1 ${errors.supplier?"border-red-500" : "border-sky-500"}`}
+                                           defaultValue={""}
+                                           {...register("supplier")}
+                                     />
+                                          <span className="text-red-500 text-sm">{ errors.supplier?.message }</span>
                                 </div>
                                 
                             </div>

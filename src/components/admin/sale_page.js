@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+
 // import NavBar from '../navbar'
 import { set, useForm } from 'react-hook-form';
 import * as Yup from 'yup';
@@ -10,6 +11,21 @@ import image from '../../assets/images/clinton.png'
 import NavBar from '../containers/header';
 import SideNav from '../sideBar/sideNav';
 import { getProductById  } from '../../store/actions/product_actions';
+
+
+// Create styles
+const styles = StyleSheet.create({
+  page: {
+    flexDirection: 'row',
+    backgroundColor: '#E4E4E4'
+  },
+  section: {
+    margin: 10,
+    padding: 10,
+    flexGrow: 1
+  }
+});
+
 
 import { useCart } from 'react-use-cart';
 
@@ -39,7 +55,7 @@ const schema = Yup.object({
     .string()
     .required()
     .trim(),
-   discount: Yup
+   unit: Yup
     .string()
     .required()
     .trim(),
@@ -49,7 +65,7 @@ function SaleProduct() {
 
     const navigate = useNavigate();
     const [reload , setReload] = useState(0);
-    const [productDiscount, setProductDiscount] = useState(0);
+    // const [productunit, setProductDiscount] = useState(0);
     const [productAmount, setProductAmount] = useState(0)
     const [productPrice, setProductPrice] =  useState(0);
     // const [file, setFile] = useState("");
@@ -82,11 +98,11 @@ function SaleProduct() {
     })
 
     const calcCost = ( cost) => {
-        return ( (cost * productAmount) - (productAmount * productDiscount));
+        return (cost * productAmount);
     }
 
-    const total =  ((productPrice *  productAmount) - (productAmount * productDiscount));
-    
+    const total =  (productPrice *  productAmount);
+
     const onSubmit = data => {
         data.id = params.id
         data.price =  total;
@@ -108,7 +124,7 @@ function SaleProduct() {
                 buyingPrice: '',
                 price: '',
                 amount: '',
-                discount: '',
+                unit: '',
                 total_cost: '',
 
 
@@ -184,14 +200,13 @@ function SaleProduct() {
                             </div>
                             <div className="grid grid-cols-2 gap-1 w-full mx-auto mb-3">
                             <div className="w-10/12 xsm:w-full sm:w-11/12 mx-auto">
-                                    <label htmlFor="supplier Address" className='text-sky-600'>Discount</label> <br />
-                                    <input type="text" placeholder='discount ' 
-                                              className={`rounded-md border-2 w-11/12 focus:outline-none px-2 xl:py-2 lg:py-2 md:py-2 py-1 ${errors.discount?"border-red-500" : "border-sky-500"} `}
-                                     defaultValue={0.00}
-                                     {...register("discount")}
-                                     onChange={(e) => setProductDiscount(e.target.value)}
+                                    <label htmlFor="supplier Address" className='text-sky-600'>Units</label> <br />
+                                    <input type="text" placeholder='Units ' 
+                                              className={`rounded-md border-2 w-11/12 focus:outline-none px-2 xl:py-2 lg:py-2 md:py-2 py-1 ${errors.unit?"border-red-500" : "border-sky-500"} `}
+                                     defaultValue={product.current_product.data.unit}
+                                     {...register("unit")}
                                     />
-                                    <span className="text-red-500 text-sm">{ errors.discount?.message }</span>
+                                    <span className="text-red-500 text-sm">{ errors.unit?.message }</span>
                                 </div>
 
                                       <div className="w-10/12 xsm:w-full sm:w-11/12 mx-auto">

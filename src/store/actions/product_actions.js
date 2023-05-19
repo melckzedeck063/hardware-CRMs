@@ -26,7 +26,8 @@ export const createProduct =  createAsyncThunk('/new_product', async(values)  =>
             wholeSale :  values.wholeSale,
             sellingPrice  :  values.sellingPrice,
             memberPrice :  values.memberPrice,
-            quantity :  values.quantity
+            quantity :  values.quantity,
+            unit :  values.unit
         });
 
         // console.log(response.data);
@@ -75,7 +76,8 @@ export const updateProduct =  createAsyncThunk('/update', async (values,id)  => 
             wholeSale :  values.wholeSale,
             sellingPrice  :  values.sellingPrice,
             memberPrice :  values.memberPrice,
-            quantity :  values.quantity
+            quantity :  values.quantity,
+            unit :  values.unit
         });
 
         console.log(response.data);
