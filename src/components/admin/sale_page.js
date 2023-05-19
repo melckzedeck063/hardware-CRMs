@@ -16,6 +16,7 @@ import { getProductById  } from '../../store/actions/product_actions';
 
 
 import { useCart } from 'react-use-cart';
+import { saleNow } from '../../store/actions/sales_actions';
 
 
 const schema = Yup.object({
@@ -95,7 +96,7 @@ function SaleProduct() {
         data.id = params.id
         data.price =  total;
         console.log(data)
-        // dispatch( updateProduct(data) );
+        dispatch( saleNow(data) );
         addItem(data);
 
         setTimeout(() => {
