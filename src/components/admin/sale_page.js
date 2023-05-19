@@ -13,18 +13,6 @@ import SideNav from '../sideBar/sideNav';
 import { getProductById  } from '../../store/actions/product_actions';
 
 
-// Create styles
-const styles = StyleSheet.create({
-  page: {
-    flexDirection: 'row',
-    backgroundColor: '#E4E4E4'
-  },
-  section: {
-    margin: 10,
-    padding: 10,
-    flexGrow: 1
-  }
-});
 
 
 import { useCart } from 'react-use-cart';

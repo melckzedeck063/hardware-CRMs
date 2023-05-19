@@ -1,13 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useCart } from 'react-use-cart';
 import SideNav from '../sideBar/sideNav';
 import NavBar from '../containers/header';
 import * as FaIcons from 'react-icons/fa';
 import * as MdIcons from 'react-icons/md' 
+import image from '../../assets/images/clinton.png'
 
 import ReactTable from './component/table_card';
 
 export default function  CartPage() {
+
+    const [hide,setHide] =  useState(true);
 
     const {
         isEmpty,
@@ -16,23 +19,36 @@ export default function  CartPage() {
         items,
         updateItemQuantity,
         removeItem,
+        emptyCart
       } = useCart();
 
-      console.log(items)
+    //   console.log(items)
+
+    const printInvoice = () => {
+        setHide(false);
+        setTimeout(() => {
+            window.print();
+        }, 2000);
+
+        setTimeout(() => {
+           emptyCart()
+        }, 8000);
+      }
 
     const columns = [
         {
             Header: 'ProductName',
             accessor: 'productName',
           },
-          {
-            Header: 'Buying Price',
-            accessor: 'buyingPrice',
-          },
+          
         {
           Header: 'Selling Price',
           accessor: 'selling_price',
         },
+        {
+            Header: 'Units',
+            accessor: 'unit',
+          },
         {
           Header: 'Amount',
           accessor: 'amount',
@@ -78,21 +94,51 @@ export default function  CartPage() {
   return (
     <div className='w-full bg-white'>
         <div className="flex w-full">
-            <SideNav />
+            {
+                hide && (
+                    <SideNav />
+                )
+            }
             <div className="w-full">
-                <NavBar />
+                {
+                    hide && (
+                        <NavBar />
+                        )
+                    }
                 <div className='py-2'>
-            <div className="text-2xl text-sky-600 text-center font-bold">Sold Items</div>
-                <div className="py-2 flex space-x-32 w-10/12 mx-auto -mr-96">
-                    <div className="">
-                     {totalUniqueItems} item(s) 
-                    </div> 
-                    <div className="text-lg font-bold text-sky-500"> {cartTotal} Tshs </div>
+            <div className="text-2xl text-sky-600 text-center font-bold">
+               <img src={image} alt="" className='h-32 w-52 mx-auto' />
+            </div>
+            <div className="flex justify-between  w-10/12 mx-auto">
+                <div className="-ml-8">
+                    <div className="text-sky-600 font-medium">Clinton Electrical Solution</div>
+                    <div className="text-sky-600 font-medium">Dodoma</div>
+                    <div className="text-sky-600 font-medium">6th Road Kidia One</div>
+                    <div className="text-sky-600 font-medium"> {totalUniqueItems} Item(s)</div>
                 </div>
+                <div className="">
+                <div className="text-sky-600 font-mediumm">clinton@solution.co.tz</div>
+                    <div className="text-sky-600 font-medium">0744327867</div>
+                    <div className="text-sky-600 font-medium">{totalUniqueItems} Item(s) </div>
+                    <div className="text-lg font-bold text-sky-600 flex justify-between">
+                        <div className="text-green-700 font-normal">Total </div>
+                        <div className="text-sky-600">{cartTotal} Tshs</div>
+                    </div>
+                </div>
+            </div>
+                
             {
               items?(
               <div className="w-11/12 mx-auto">
                 <ReactTable cols={columns} data={items} />
+
+                <div className="py-2">
+                    {
+                        hide &&(
+                            <button onClick={() => printInvoice()} className='bg-sky-500 rounded-lg py-1 px-2 text-white font-medium'>Generate  Perfoma</button>
+                        )
+                    }
+                </div>
             </div>
               )
               : 
