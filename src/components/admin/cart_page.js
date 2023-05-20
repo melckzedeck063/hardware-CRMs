@@ -34,7 +34,7 @@ export default function  CartPage() {
 
         setTimeout(() => {
            emptyCart()
-        }, 8000);
+        }, 60000);
       }
 
     const columns = [
@@ -134,16 +134,6 @@ export default function  CartPage() {
               <div className="w-11/12 mx-auto">
                 <ReactTable cols={columns} data={items} />
 
-                <div className="py-2 flex space-x-6">
-                    {
-                        hide &&(
-                          <div className="flex">
-                          <button onClick={() => navigate('/products')} className='bg-green-700 rounded-lg py-1 px-2 text-white font-medium'>Generate  Perfoma</button>
-                            <button onClick={() => printInvoice()} className='bg-sky-500 rounded-lg py-1 px-2 text-white font-medium'>Generate  Perfoma</button>
-                         </div>
-                        )
-                    }
-                </div>
             </div>
               )
               : 
@@ -153,6 +143,16 @@ export default function  CartPage() {
             </div>
             </>
             }
+                <div className="py-2 flex space-x-6">
+                    {
+                        hide &&(
+                          <div className="flex space-x-6 w-10/12 mx-auto">
+                          <button onClick={() => navigate('/products')} className='bg-green-700 rounded-lg py-1 px-2 text-white font-medium'>Add Item</button>
+                            <button onClick={() => printInvoice()} className='bg-sky-500 rounded-lg py-1 px-2 text-white font-medium'>Generate  Perfoma</button>
+                         </div>
+                        )
+                    }
+                </div>
           </div>
             </div>
         </div>

@@ -244,7 +244,7 @@ function SideNav() {
               </li> */}
               
               <li className={`text-gray-800 py-2.5 space-x-1 text-sm  cursor-pointer hover:bg-light-white hover:text-gray-800 hover:px-1 rounded-md mt-2`}>
-                <Link style={{ textDecoration: "none" }} to='#' className="flex items-center hover:text-white no-underline text-gray-100 ">
+                <Link style={{ textDecoration: "none" }} to='/reports' className="flex items-center hover:text-white no-underline text-gray-100 ">
                   <span className='text-xl block float-left pr-1'>
                     <SiIcons.SiSimpleanalytics />
                   </span>

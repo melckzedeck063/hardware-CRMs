@@ -48,6 +48,10 @@ const schema = Yup.object({
     .string()
     .required()
     .trim(),
+    quantity : Yup
+    .string()
+    .required()
+    .trim()
 })
 
 function SaleProduct() {
@@ -115,6 +119,7 @@ function SaleProduct() {
                 amount: '',
                 unit: '',
                 total_cost: '',
+                quantity : ''
 
 
             })
@@ -136,7 +141,7 @@ function SaleProduct() {
                                  <img src={image} alt="" className='h-32 w-32' />
                             </div>             
                                      <div className="p-2">
-                              <p className="text-center text-3xl font-bold mb-4 text-sky-600 -mt-4">Update Product</p>
+                              <p className="text-center text-3xl font-bold mb-4 text-sky-600 -mt-4">Sale Product</p>
                               <form onSubmit={handleSubmit(onSubmit)} className="py-2 px-1">
                             <div className="grid grid-cols-2 gap-1 w-full mx-auto mb-3">
                                       <div className="w-10/12 xsm:w-full sm:w-11/12 mx-auto">
@@ -197,6 +202,12 @@ function SaleProduct() {
                                     />
                                     <span className="text-red-500 text-sm">{ errors.unit?.message }</span>
                                 </div>
+
+                                <input type="hidden" placeholder='Units ' 
+                                            //   className={`rounded-md border-2 w-11/12 focus:outline-none px-2 xl:py-2 lg:py-2 md:py-2 py-1 ${errors.unit?"border-red-500" : "border-sky-500"} `}
+                                     defaultValue={product.current_product.data.quantity}
+                                     {...register("quantity")}
+                                    />
 
                                       <div className="w-10/12 xsm:w-full sm:w-11/12 mx-auto">
                                     <label htmlFor="quantity" className='text-sky-600'>Total Cost</label> <br />

@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getAllSales, saleNow } from "../actions/sales_actions";
+import { getAllSales, getReport, saleNow } from "../actions/sales_actions";
 
 
 const salesReducer =   createSlice({
@@ -7,6 +7,7 @@ const salesReducer =   createSlice({
     initialState  : {
         all_sales:  [],
         sale :  null,
+        reports : [],
         new_sale :  null,
         status : "",
         error :  null
@@ -43,6 +44,17 @@ const salesReducer =   createSlice({
         state.all_sales =  action.payload
      })
      .addCase(getAllSales.rejected, (state,action) => {
+        state.status = "Failed";
+        state.error =  action.error.message
+     })
+     .addCase(getReport.pending, (state,action) => {
+        state.status = "Loading"
+     })
+     .addCase(getReport.fulfilled, (state,action) => {
+        state.status = "Succesfull";
+        state.reports =  action.payload
+     })
+     .addCase(getReport.rejected, (state,action) => {
         state.status = "Failed";
         state.error =  action.error.message
      })

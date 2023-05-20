@@ -19,6 +19,7 @@ import UpdateUser from './components/admin/updateUser';
 import CartPage from './components/admin/cart_page';
 import SaleProduct from './components/admin/sale_page';
 import SalesData from './components/admin/salesData';
+import Reports from './components/admin/reports';
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
              <Route path='/sale_product/:id' element={ <ProtectedRoute> <SaleProduct /> </ProtectedRoute> } />
              <Route path='/sales' element={ <ProtectedRoute> <SalesData /> </ProtectedRoute> } />
              <Route path='/cart' element={ <ProtectedRoute> <CartPage /> </ProtectedRoute> } />
+             <Route path='/reports' element={ <ProtectedRoute> <Reports /> </ProtectedRoute> } />
              <Route path='/dependants' element={ <ProtectedRoute>  <MyDependants />  </ProtectedRoute> } />
              <Route path='/new_dependant' element={ <ProtectedRoute>  <DependantRequest />  </ProtectedRoute>} />
              <Route path='/staffs' element={<ProtectedRoute>  <AllStaffs /> </ProtectedRoute> } />
