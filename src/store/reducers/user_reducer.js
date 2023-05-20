@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getAllCustomers, getAllStaffs, getUserById, signInUser, signUpUser, updateUser } from "../actions/user_actions";
+import { getAllCustomers, getAllStaffs, getDashboardSummary, getUserById, signInUser, signUpUser, updateUser } from "../actions/user_actions";
 
 
 export const userSlice = createSlice({
@@ -8,6 +8,7 @@ export const userSlice = createSlice({
         loged_user : null,
         current_user : null,
         users : [],
+        dashboard  : null,
         staffs : [],
         status :  '',
         error  :  null,
@@ -101,6 +102,19 @@ export const userSlice = createSlice({
             state.current_user = action.payload
         })
         .addCase(updateUser.rejected, (state,action) => {
+            state.status = "Failed";
+            state.message = "Request  failed please try again";
+            state.error = action.error.message
+        })
+        .addCase(getDashboardSummary.pending,(state,action) => {
+            state.status = "Loading"
+        })
+        .addCase(getDashboardSummary.fulfilled, (state,action) => {
+            state.status = "Successfull";
+            state.message = "User data updated succesfully ";
+            state.dashboard = action.payload
+        })
+        .addCase(getDashboardSummary.rejected, (state,action) => {
             state.status = "Failed";
             state.message = "Request  failed please try again";
             state.error = action.error.message

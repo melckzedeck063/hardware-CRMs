@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 // import { getAllOrders, getMyOrders } from '../../store/actions/order_actions';
 // import * as BsIcons from 'react-icons/bs';
 // import * as HiIcons from 'react-icons/hi'
@@ -14,15 +14,16 @@ import NewCard from './component/new_cards'
 import DataChart from './charts/data_chart';
 import PieChart from './charts/new_chart';
 // import { dashboardSummary } from '../../store/actions/dashboard_actions';
-import { useEffect } from 'react';
 import NavBar from '../containers/header';
 import SideNav from '../sideBar/sideNav'
+import { getDashboardSummary } from '../../store/actions/user_actions';
+import { useDispatch,useSelector } from 'react-redux';
 
 function Dashboard() {
    
   const [userRole, setUserRole] = useState("");
   const [renders, setRenders] = useState(0);
-//   const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   setTimeout(() => {
     if (renders < 5) {
@@ -30,14 +31,14 @@ function Dashboard() {
     }
 }, 600);
 
-// const dash_summary  = useSelector(state => state.Dashboards)
-// console.log(dash_summary)
+const dash_summary  = useSelector(state => state.users)
+console.log(dash_summary.dashboard)
 
-// useEffect(() => {
-//   if (dash_summary && !dash_summary.dashboard_data && renders < 3 ) {
-//       dispatch( dashboardSummary() )
-//   }
-// })
+useEffect(() => {
+  if (dash_summary && dash_summary.dashboard === null && renders < 3 ) {
+      dispatch( getDashboardSummary() )
+  }
+})
 
 //   if (userRole === "") {
 //     const storage = sessionStorage.getItem('authenticatedUser');
@@ -69,55 +70,55 @@ function Dashboard() {
             
             <div className="w-full p-4 xl:p-5 lg:p-6 md:p-5 mx-auto py-12">
             <div className="mx-auto">
-                {/* {
-                  dash_summary && dash_summary.dashboard_data ? (
-                    dash_summary && dash_summary.dashboard_data && dash_summary.dashboard_data.error === false ? (
+                {
+                  dash_summary?.dashboard ? (
+                  dash_summary?.dashboard && dash_summary.dashboard.empty === false ? (
               <div className="grid grid-cols-1 gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 w-11/12 mx-auto mb-4">
-                  <DashCard heading={"RECEIVED ORDERS"} data={12} />
-                  <DashCard heading={"PENDING ORDERS"} data={12} />
-                  <DashCard heading={"PROCESSED ORDERS"} data={12}/>
-                  <DashCard heading={"DELIVERED ORDERS"} data={12}  />
+                  <DashCard heading={"AVAILABLE PRODUCTS"} data={dash_summary.dashboard.data.product_data[0].total_products} />
+                  <DashCard heading={"SOLD PRODUCTS"} data={0} />
+                  <DashCard heading={"AVAILABLE PRODUCTS"} data={0}/>
+                  <DashCard heading={"ALL CATEGORIES"} data={0}  />
                 </div>
                      
-                    ) : <> */}
+                    ) : <>
                     <div className="grid grid-cols-1 gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 w-11/12 mx-auto mb-4">
                   <DashCard heading={"ALL PRODUCTS"} data={0} />
                   <DashCard heading={"SOLD PRODUCTS"} data={0} />
                   <DashCard heading={"AVAILABLE PRODUCTS"} data={0}/>
                   <DashCard heading={"ALL CATEGORIES"} data={0}  />
                 </div>
-                      {/* </> */}
-                  {/* ) :  null
-                } */}
+                      </>
+                   ) :  null
+                } 
                 
              
                      
-                      {/* {
-                        dash_summary && dash_summary.dashboard_data ? (
-                       dash_summary && dash_summary.dashboard_data && dash_summary.dashboard_data.error === false ? (
+                      {
+                        dash_summary && dash_summary.dashboard ? (
+                       dash_summary && dash_summary.dashboard && dash_summary.dashboard.empty === false ? (
                           <>
-                  <div className="grid xsm:grid-cols-1  gap-2 sm:grid-cols-1 grid-cols-2 mt-2 w-11/12 mx-auto">
-                    <div className="mb-3">
-                      <PieChart content={dash_summary && dash_summary.dashboard_data? dash_summary.dashboard_data.data.graphData.pieChartData : ""} />
-                    </div>
+                  <div className=" mt-2 w-11/12 mx-auto">
+                    {/* <div className="mb-3">
+                      <PieChart content={dash_summary && dash_summary.dashboard? dash_summary.dashboard.data.graphData.pieChartData : ""} />
+                    </div> */}
                     
                     <div className="grid grid-cols-1 gap-2 w-11/12 mx-auto">
-                    <NewCard data={'$28.4'} heading={"Sales"} />
-                    <NewCard data={64} heading={"Orders"} />
+                    <NewCard data={dash_summary.dashboard.data.total_sales[0].sales} heading={"TOTAL SALES"}  />
+                    <NewCard data={64} heading={"TOTAL PROFIT"} />
                   </div>
                   
                   </div>
-                  <div className="py-6 bg-white shadow-xl rounded px-1 text-white w-11/12 mx-auto my-6">
+                  {/* <div className="py-6 bg-white shadow-xl rounded px-1 text-white w-11/12 mx-auto my-6">
                     <DataChart  content={dash_summary && dash_summary.dashboard_data? dash_summary.dashboard_data.data.graphData.lineChartData : ""} />
-                  </div>
+                  </div> */}
                   </>
-                    ) : */}
+                    ) :
                       <div className="grid grid-cols-1 gap-2 w-11/12 mx-auto">
-                          <NewCard data={128.4} heading={"SALES"} />
-                          <NewCard data={64} heading={"CUSTOMERS"} />
+                          <NewCard data={'$28.4'} heading={"TOTAL SALES"}/>
+                          <NewCard data={64} heading={"TOTAL PROFIT"} />
                         </div>
-                        {/* ) :  null 
-                     } */}
+                        ) :  null 
+                     } 
                   
                   {/* <div className="py-6 bg-white shadow-xl rounded px-1 text-white w-11/12 mx-auto my-6">
                   </div> */}
@@ -125,6 +126,7 @@ function Dashboard() {
 
                </div>
               </div>
+                  {/* <button onClick={() => dispatch( getDashboardSummary() )} > click</button> */}
                   </div>
             </div>
           </div> 

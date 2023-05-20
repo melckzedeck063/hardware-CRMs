@@ -15,7 +15,7 @@ function NewCards({data, heading}) {
                   </div>
                 </div>
                  <div className="py-1">
-                    <div className="font-bold text-3xl text-slate-800"> {data}K</div>
+                    <div className="font-bold text-3xl text-slate-800 ml-4"> {data} <span className='ml-6 text-sky-600'>Tshs</span> </div>
                     <div className="h-2 bg-sky-300 rounded">
                           <div className={`bg-sky-700 rounded w-${data/4} p-1`}></div>
                     </div>

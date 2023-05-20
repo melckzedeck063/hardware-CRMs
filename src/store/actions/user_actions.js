@@ -17,6 +17,18 @@ AUTH_API.interceptors.request.use((req) => {
     return req
 })
 
+const DASH_API = axios.create({ baseURL: `${BASE_URL}/dashboard`});
+AUTH_API.interceptors.request.use((req) => {
+    const storage = sessionStorage.getItem('token');
+    const { token } = JSON.parse(storage);
+
+    if (token) {
+        req.headers.Authorization =  `Bearer bearer ${token}`
+    }
+
+    return req
+})
+
 
 export  const signInUser = createAsyncThunk('/user', async(values) => {
     // console.log(values)
@@ -109,5 +121,18 @@ export const updateUser = createAsyncThunk('/update/user', async(values) => {
     catch(error){
         console.log(error);
         return error.message
+    }
+})
+
+export const getDashboardSummary = createAsyncThunk('/summary', async() => {
+    try{
+        const response =  await  DASH_API.get('/all');
+
+        console.log(response.data);
+        return response.data
+    }
+    catch(error) {
+        console.log(error)
+        return error.message;
     }
 })
