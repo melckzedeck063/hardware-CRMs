@@ -7,10 +7,12 @@ import * as MdIcons from 'react-icons/md'
 import image from '../../assets/images/clinton.png'
 
 import ReactTable from './component/table_card';
+import { useNavigate } from 'react-router';
 
 export default function  CartPage() {
 
     const [hide,setHide] =  useState(true);
+    const  navigate  = useNavigate();
 
     const {
         isEmpty,
@@ -132,10 +134,13 @@ export default function  CartPage() {
               <div className="w-11/12 mx-auto">
                 <ReactTable cols={columns} data={items} />
 
-                <div className="py-2">
+                <div className="py-2 flex space-x-6">
                     {
                         hide &&(
+                          <div className="flex">
+                          <button onClick={() => navigate('/products')} className='bg-green-700 rounded-lg py-1 px-2 text-white font-medium'>Generate  Perfoma</button>
                             <button onClick={() => printInvoice()} className='bg-sky-500 rounded-lg py-1 px-2 text-white font-medium'>Generate  Perfoma</button>
+                         </div>
                         )
                     }
                 </div>
