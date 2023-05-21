@@ -20,14 +20,6 @@ const schema = Yup.object({
     .string()
     .required()
     .trim(),
-    gender: Yup
-    .string()
-    .required()
-    .trim(),
-    role: Yup
-    .string()
-    .required()
-    .trim(),
     telephone : Yup
     .string()
     .required()
@@ -37,20 +29,16 @@ const schema = Yup.object({
     .required()
     .email()
     .trim(),
-    password: Yup
+    tin: Yup
+    .string()
+    .required(),
+    vrn : Yup
     .string()
     .required()
-    .min(8)
-    .trim(),
-    confirmPassword : Yup
-    .string()
-    .required()
-    .min(8)
-    .oneOf([Yup.ref("password")], "Passwords do not match")
     .trim()
 })
 
-function SignupUser() {
+function AddCustomer () {
 
     const navigate = useNavigate();
     const dispatch =  useDispatch()
@@ -63,8 +51,8 @@ function SignupUser() {
     })
 
     const onSubmit = data => {
-        // console.log(data)
-        dispatch( signUpUser(data) )
+        console.log(data)
+        // dispatch( signUpUser(data) )
     }
 
 
@@ -74,11 +62,10 @@ function SignupUser() {
                 firstName: '',
                 // middleName: '',
                 lastName: '',
-                role: '',
                 telephone: '',
                 email: '',
-                password: '',
-                confirmPassword : ''
+                vrn: '',
+                tin : ''
             })
         }
     })
@@ -90,13 +77,13 @@ function SignupUser() {
           <NavBar  />
               {/* <NavBar /> */}
               <div className="bg-slate-50 py-10">
-                  <div className="mx-auto w-11/12 lg:w-8/12 xl:w-8/12">
+                  <div className="mx-auto w-11/12 lg:w-7/12 xl:w-7/12">
                       <div className="rounded-md shadow bg-white w-full">  
                       <div className="w-32 h-32 mx-auto">
                                  <img src={image} alt="" className='h-32 w-32' />
                             </div>               
                           <div className="p-2">
-                              <p className="text-center text-3xl font-bold mb-4 text-sky-600">Add Staff</p>
+                              <p className="text-center text-3xl font-bold mb-4 text-sky-600">Add Customer</p>
                               <form onSubmit={handleSubmit(onSubmit)} className="py-2 px-1">
                             <div className="grid grid-cols-2 gap-1 w-full mx-auto mb-3">
                                       <div className="w-10/12 xsm:w-full sm:w-11/12 mx-auto">
@@ -118,38 +105,7 @@ function SignupUser() {
                                     <span className="text-red-500 text-sm">{ errors.lastName?.message }</span>
                           </div>
                             </div>
-                            <div className="grid grid-cols-2 gap-1 w-full mx-auto mb-3">
-
-                            <div className="w-10/12 xsm:w-full sm:w-11/12 mx-auto">
-                              <label htmlFor="Lastname" className='text-sky-600'>Role</label> <br />
-                                    <select name="" id=""
-                                     className={`rounded-md w-11/12 border-2 focus:outline-none px-2 xl:py-2 lg:py-2 md:py-2 py-1 ${errors.role? "border-red-500" : "border-sky-500"} `}
-                                     defaultValue={""}
-                                     {...register("role")}
-                                    >
-                                        <option value="">Select role</option>
-                                        <option value="user">User</option>
-                                        <option value="staff">Staff</option>
-                                        <option value="admin">Admin</option>
-                                    </select>
-                               
-                                    <span className="text-red-500 text-sm">{ errors.role?.message }</span>
-                          </div>
-
-                                <div className="mx-auto w-11/12 mb-1  ml-3">
-                                    <label className='ml-2 text-sky-600' htmlFor="Gender">Gender </label> <br />
-                                    <input className='ml-2' type="radio" checked  name='gender' value={"Male"} placeholder='gender' 
-                                    //  defaultValue={""}
-                                     {...register("gender")}
-                                    /> Male
-                                    <input type="radio"  name='gender' value={"Female"} placeholder='gender' 
-                                    className='ml-3'
-                                    //  defaultValue={""}
-                                     {...register("gender")}
-                                    /> Female <br />
-                                     
-                                </div>
-                            </div>
+                            
                             <div className="grid grid-cols-2 gap-1 w-full mx-auto mb-3">
                                       <div className="w-10/12 xsm:w-full sm:w-11/12 mx-auto">
                                     <label htmlFor="Telephone" className='text-sky-600'>Telephone</label> <br />
@@ -172,22 +128,22 @@ function SignupUser() {
                             </div>
                             <div className="grid grid-cols-2 gap-1 w-full mx-auto mb-3">
                                       <div className="w-10/12 xsm:w-full sm:w-11/12 mx-auto">
-                                    <label htmlFor="Password" className='text-sky-600'>Password</label> <br />
-                                          <input type="password" placeholder='Password'
-                                           className={`rounded-md w-11/12 border-2 focus:outline-none px-2 xl:py-2 lg:py-2 md:py-2 py-1 ${errors.password?"border-red-500" : "border-sky-500"} `}
+                                    <label htmlFor="Password" className='text-sky-600'>TIN</label> <br />
+                                          <input type="text" placeholder='Tin Number'
+                                           className={`rounded-md w-11/12 border-2 focus:outline-none px-2 xl:py-2 lg:py-2 md:py-2 py-1 ${errors.tin?"border-red-500" : "border-sky-500"} `}
                                            defaultValue={""}
-                                           {...register("password")}
+                                           {...register("tin")}
                                      />
-                                          <span className="text-red-500 text-sm">{ errors.password?.message }</span>
+                                          <span className="text-red-500 text-sm">{ errors.tin?.message }</span>
                                 </div>
                                 <div className="w-10/12 xsm:w-full sm:w-11/12 mx-auto">
-                                    <label htmlFor="Confirm Password" className='text-sky-600'>Confirm Password</label> <br />
-                                    <input type="password" placeholder='Confirm Password' 
-                                              className={`rounded-md border-2 w-11/12  focus:outline-none px-2 xl:py-2 lg:py-2 md:py-2 py-1 ${errors.confirmPassword?"border-red-500" : "border-sky-500"} `}
+                                    <label htmlFor="Confirm Password" className='text-sky-600'>VRN</label> <br />
+                                    <input type="text" placeholder='vrn' 
+                                              className={`rounded-md border-2 w-11/12  focus:outline-none px-2 xl:py-2 lg:py-2 md:py-2 py-1 ${errors.vrn?"border-red-500" : "border-sky-500"} `}
                                      defaultValue={""}
-                                     {...register("confirmPassword")}
+                                     {...register("vrn")}
                                     />
-                                    <span className="text-red-500 text-sm">{ errors.confirmPassword?.message }</span>
+                                    <span className="text-red-500 text-sm">{ errors.vrn?.message }</span>
                                 </div>
                             </div>
                             <div className="mx-auto w-9/12 py-4">            
@@ -210,4 +166,4 @@ function SignupUser() {
   )
 }
 
-export default SignupUser
+export default AddCustomer

@@ -6,16 +6,19 @@ import ReactTable from './component/table_card'
 import * as FaIcons from 'react-icons/fa';
 import * as MdIcons from 'react-icons/md'
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllStaffs } from '../../store/actions/user_actions';
+import { getAllStaffs, getAllCustomers } from '../../store/actions/user_actions';
+import { useNavigate } from 'react-router';
 
 export default function AllStaffs() {
 
   const [renders, setRenders] =  useState(0);
   const dispatch = useDispatch();
+  const navigate =  useNavigate()
 
 
-  const staffs  =  useSelector(state  => state.users);
-  // console.log(staffs.staffs);
+
+  const customers  =  useSelector(state  => state.users);
+  // console.log(customers.users);
 
   setTimeout(() => {
     if(renders  < 5){
@@ -24,10 +27,20 @@ export default function AllStaffs() {
   }, 1000);
 
   useEffect(() =>{
-    if(staffs && staffs.staffs &&  staffs.staffs.length < 1 &&  renders <= 3){
-       dispatch( getAllStaffs() )
+    if(customers && customers.users &&  customers.users.length < 1 &&  renders <= 3){
+       dispatch( getAllCustomers() )
     }
   })
+
+  const handleEditClick = (id) => {
+    console.log('Edit button clicked for ID:', id);
+     navigate(`/customer/${id}`)
+  };
+
+  const handleDeleteClick = (id) => {
+    console.log('Delete button clicked for ID:', id);
+  };
+
 
     const columns = [
         {
@@ -38,7 +51,7 @@ export default function AllStaffs() {
             Header: 'LastName',
             accessor: 'lastName',
           },
-       
+        
         {
           Header: 'Email',
           accessor: 'email',
@@ -46,22 +59,18 @@ export default function AllStaffs() {
         {
           Header: 'Phone',
           accessor: 'telephone',
-        },
+        },       
+        
         {
           Header: 'Position',
           accessor: 'role',
         },
-        
-        {
-          Header: 'Country',
-          accessor: 'country',
-        },
         {
           Header: 'Actions',
           accessor: 'actions',
-          Cell: () => (
+          Cell: ({row}) => (
             <>
-              <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold px-2 rounded mr-2">
+              <button onClick={() => handleEditClick(row.original._id) } className="bg-blue-500 hover:bg-blue-700 text-white font-bold px-2 rounded mr-2">
                  <FaIcons.FaEdit className='font-2xl text-white m-1'  />
               </button>
               <button className="bg-red-500 hover:bg-red-700 text-white font-bold px-2 rounded">
@@ -72,19 +81,23 @@ export default function AllStaffs() {
         },
       ];
 
-      const data = [
-        {
-          firstname: '',
-          lastname: '',
-          age: 30,
-          email: 'Loading',
-          phone: '',
-          postion: '',
-          city: '',
-          country: '',
-        },
-        
-      ];
+// let  data = [];
+//       if(customers.users && customers.users.data.data){
+//         data.push(customers.users.data.data)
+//       } 
+//       else {
+    const data = [
+          {
+            firstname: '',
+            lastname : '',
+            email: 'loading',
+            phone: '',
+            country: '',
+          },
+    ]
+      // }
+        // add more rows as needed
+      
 
   return (
     <>
@@ -93,16 +106,19 @@ export default function AllStaffs() {
        <div className='w-full bg-white'>
           <NavBar  />
           <div className='py-2'>
-            <div className="text-2xl text-sky-600 text-center font-bold">Our Staffs</div>
+            <div className="flex justify-between w-11/12 mx-auto">             
+                <div className="text-2xl text-sky-600 text-center font-bold">Our Staffs</div>
+                <button onClick={() => navigate('/register')} className="px-2 py-1 bg-green-600 text-white text-sm rounded-lg font-medium"> Add User </button>
+            </div>
             {
-              staffs.staffs?.data?.data ?(
+              customers.users?.data?.data?(
               <div className="w-11/12 mx-auto">
-                <ReactTable cols={columns} data={staffs.staffs.data.data} />
+                <ReactTable cols={columns} data={customers.users.data.data} />
             </div>
               )
               : 
               <>
-                <div className="w-11/12 mx-auto">
+              <div className="w-11/12 mx-auto">
                 <ReactTable cols={columns} data={data} />
             </div>
             </>

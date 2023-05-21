@@ -20,6 +20,7 @@ import CartPage from './components/admin/cart_page';
 import SaleProduct from './components/admin/sale_page';
 import SalesData from './components/admin/salesData';
 import Reports from './components/admin/reports';
+import AddCustomer from './components/admin/add_customer';
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
           <Routes>
              <Route  path='/' element={ <Login  /> } />
              <Route  path='/register' element={ <ProtectedRoute> <SignupUser /> </ProtectedRoute> } />
+             <Route  path='/new_customer' element={ <ProtectedRoute> <AddCustomer /> </ProtectedRoute> } />
              <Route path='/forget' element={ <ResetEmail /> } />
              <Route path='/reset' element={ <ResetPassword /> } />
              <Route path='/dashboard' element={ <ProtectedRoute> <Dashboard/>  </ProtectedRoute> } />

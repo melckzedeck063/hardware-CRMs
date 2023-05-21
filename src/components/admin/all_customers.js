@@ -106,7 +106,10 @@ export default function AllCustomers() {
        <div className='w-full bg-white'>
           <NavBar  />
           <div className='py-2'>
+            <div className="flex justify-between w-11/12 mx-auto">           
             <div className="text-2xl text-sky-600 text-center font-bold">Our Customers</div>
+            <button onClick={() => navigate('/new_customer')} className="px-2 py-1 bg-green-600 rounded-md text-white text-sm font-medium">Add Customer</button>
+            </div>
             {
               customers.users?.data?.data?(
               <div className="w-11/12 mx-auto">

@@ -102,8 +102,8 @@ useEffect(() => {
                       <PieChart content={dash_summary && dash_summary.dashboard? dash_summary.dashboard.data.graphData.pieChartData : ""} />
                     </div> */}
                     
-                    <div className="grid grid-cols-1 gap-2 w-11/12 mx-auto">
-                    <NewCard data={dash_summary.dashboard.data.total_sales[0].sales} heading={"TOTAL SALES"}  />
+                    <div className="grid grid-cols-1 gap-2 w-full mx-auto">
+                    <NewCard data={dash_summary.dashboard.data.total_sales[0].sales} heading={"TOTAL SALES"} />
                     <NewCard data={64} heading={"TOTAL PROFIT"} />
                   </div>
                   

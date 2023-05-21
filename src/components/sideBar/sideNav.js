@@ -221,14 +221,14 @@ function SideNav() {
                 subMenuOpen && open && (
                   <ul>
                     <li className="text-gray-800 p-2 px-3 space-x-2 text-sm flex items-center cursor-pointer hover:bg-light-white rounded-md ">
-                      <Link style={{ textDecoration: "none" }} to='/customers' className="no-underline hover:text-white text-gray-100"> All Users</Link>
+                      <Link style={{ textDecoration: "none" }} to='/staffs' className="no-underline hover:text-white text-gray-100"> All Staffs</Link>
+                    </li>
+                    <li className="text-gray-800 p-2 px-3 space-x-2 text-sm flex items-center cursor-pointer hover:bg-light-white rounded-md ">
+                      <Link style={{ textDecoration: "none" }} to='/customers' className="no-underline hover:text-white text-gray-100"> All Customers </Link>
                     </li>
                     <li className="text-gray-800 p-2 px-3 space-x-2 text-sm flex items-center cursor-pointer hover:bg-light-white rounded-md ">
                       <Link style={{ textDecoration: "none" }} to='/register' className="no-underline hover:text-white text-gray-100"> Add User</Link>
                     </li>
-                    {/* <li className="text-gray-800 p-2 px-3 space-x-2 text-sm flex items-center cursor-pointer hover:bg-light-white rounded-md ">
-                      <Link style={{ textDecoration: "none" }} to='#' className="no-underline hover:text-white text-gray-100"> My Company Inactive Users </Link>
-                    </li> */}
                   </ul>
                 )
               }
