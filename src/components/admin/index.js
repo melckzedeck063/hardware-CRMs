@@ -81,7 +81,7 @@ useEffect(() => {
                 </div>
                      
                     ) : <>
-                    <div className="grid grid-cols-1 gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 w-11/12 mx-auto mb-4">
+                    <div className="grid xsm:grid-cols-1 gap-6 sm:grid-cols-1 md:grid-cols-2  grid-cols-2 w-11/12 mx-auto mb-4">
                   <DashCard heading={"ALL PRODUCTS"} data={0} />
                   <DashCard heading={"SOLD PRODUCTS"} data={0} />
                   <DashCard heading={"AVAILABLE PRODUCTS"} data={0}/>
@@ -93,7 +93,7 @@ useEffect(() => {
                 
              
                      
-                      {
+                      {/* {
                         dash_summary && dash_summary.dashboard ? (
                        dash_summary && dash_summary.dashboard && dash_summary.dashboard.empty === false ? (
                           <>
@@ -102,26 +102,16 @@ useEffect(() => {
                       <PieChart content={dash_summary && dash_summary.dashboard? dash_summary.dashboard.data.graphData.pieChartData : ""} />
                     </div> */}
                     
-                    <div className="grid grid-cols-1 gap-2 w-full mx-auto">
+                    {/* <div className="grid grid-cols-1 gap-2 w-full mx-auto">
                     <NewCard data={dash_summary.dashboard.data.total_sales[0].sales} heading={"TOTAL SALES"} />
                     <NewCard data={64} heading={"TOTAL PROFIT"} />
                   </div>
                   
-                  </div>
+                  </div> */}
                   {/* <div className="py-6 bg-white shadow-xl rounded px-1 text-white w-11/12 mx-auto my-6">
                     <DataChart  content={dash_summary && dash_summary.dashboard_data? dash_summary.dashboard_data.data.graphData.lineChartData : ""} />
                   </div> */}
-                  </>
-                    ) :
-                      <div className="grid grid-cols-1 gap-2 w-11/12 mx-auto">
-                          <NewCard data={'$28.4'} heading={"TOTAL SALES"}/>
-                          <NewCard data={64} heading={"TOTAL PROFIT"} />
-                        </div>
-                        ) :  null 
-                     } 
                   
-                  {/* <div className="py-6 bg-white shadow-xl rounded px-1 text-white w-11/12 mx-auto my-6">
-                  </div> */}
                   
 
                </div>
