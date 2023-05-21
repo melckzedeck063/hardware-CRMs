@@ -34,7 +34,7 @@ export default function AllStaffs() {
 
   const handleEditClick = (id) => {
     console.log('Edit button clicked for ID:', id);
-     navigate(`/customer/${id}`)
+     navigate(`/staff/${id}`)
   };
 
   const handleDeleteClick = (id) => {

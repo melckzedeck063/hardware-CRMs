@@ -17,6 +17,18 @@ AUTH_API.interceptors.request.use((req) => {
     return req
 })
 
+const CUSTOMER_API = axios.create({ baseURL: `${BASE_URL}/customer`});
+CUSTOMER_API.interceptors.request.use((req) => {
+    const storage = sessionStorage.getItem('token');
+    const { token } = JSON.parse(storage);
+
+    if (token) {
+        req.headers.Authorization =  `Bearer bearer ${token}`
+    }
+
+    return req
+})
+
 const DASH_API = axios.create({ baseURL: `${BASE_URL}/dashboard`});
 AUTH_API.interceptors.request.use((req) => {
     const storage = sessionStorage.getItem('token');
@@ -134,5 +146,72 @@ export const getDashboardSummary = createAsyncThunk('/summary', async() => {
     catch(error) {
         console.log(error)
         return error.message;
+    }
+})
+
+
+export  const  registerCustomer =  createAsyncThunk('customer/new', async(values)=>{
+    try{
+        const response  =  await CUSTOMER_API.post(`/new_customer`, {
+            firstName  :  values.firstName,
+            lastName :   values.lastName,
+            email :       values.email,
+            telephone :   values.telephone,
+            tin :  values.tin,
+            vrn  :  values.vrn
+        })
+
+        console.log(response.data);
+        return response.data;
+    }
+    catch(error){
+        console.log(error)
+        return error.message
+    }
+})
+
+export const getOurCustomers  = createAsyncThunk('/customers', async()  => {
+    try{
+        const  response =  await CUSTOMER_API.get('/customers');
+
+     //    console.log(response.data)
+        return response.data;
+    }
+    catch(error){
+     console.log(error);
+     return error.message
+    }
+})
+
+export const getCustomerById  = createAsyncThunk('/customer/id', async(id) => {
+    try{
+        const response =  await CUSTOMER_API.get(`/customer/${id}`);
+
+        console.log(response.data);
+        return response.data
+    }
+    catch(error){
+        console.log(error);
+        return error.message
+    }
+})
+
+export const updateCustomer = createAsyncThunk('/update/customer', async(values) => {
+    try{
+        const response =  await CUSTOMER_API.patch(`/update_customer/${values.id}`, {
+            firstName  :  values.firstName,
+            lastName :   values.lastName,
+            email :       values.email,
+            telephone :   values.telephone,
+            tin :  values.tin,
+            vrn :  values.vrn
+        })
+
+        console.log(response.data);
+        return response.data
+    }
+    catch(error){
+        console.log(error);
+        return error.message
     }
 })

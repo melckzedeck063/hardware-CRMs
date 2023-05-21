@@ -70,6 +70,7 @@ function UpdateUser() {
     })
 
     const onSubmit = data => {
+        data.id = params.id
         console.log(data)
         // dispatch( UpdateUser(data) )
     }

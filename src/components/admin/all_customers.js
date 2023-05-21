@@ -6,7 +6,7 @@ import ReactTable from './component/table_card'
 import * as FaIcons from 'react-icons/fa';
 import * as MdIcons from 'react-icons/md'
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllCustomers } from '../../store/actions/user_actions';
+import { getAllCustomers, getOurCustomers } from '../../store/actions/user_actions';
 import { useNavigate} from 'react-router';
 
 export default function AllCustomers() {
@@ -27,8 +27,8 @@ export default function AllCustomers() {
   }, 1000);
 
   useEffect(() =>{
-    if(customers && customers.users &&  customers.users.length < 1 &&  renders <= 3){
-       dispatch( getAllCustomers() )
+    if(customers && customers.customers &&  customers.customers.length < 1 &&  renders <= 3){
+       dispatch( getOurCustomers())
     }
   })
 
@@ -62,8 +62,12 @@ export default function AllCustomers() {
         },       
         
         {
-          Header: 'Position',
-          accessor: 'role',
+          Header: 'TIN',
+          accessor: 'tin',
+        },
+        {
+          Header: 'VRN',
+          accessor: 'vrn',
         },
         {
           Header: 'Actions',
@@ -73,9 +77,9 @@ export default function AllCustomers() {
               <button onClick={() => handleEditClick(row.original._id) } className="bg-blue-500 hover:bg-blue-700 text-white font-bold px-2 rounded mr-2">
                  <FaIcons.FaEdit className='font-2xl text-white m-1'  />
               </button>
-              <button className="bg-red-500 hover:bg-red-700 text-white font-bold px-2 rounded">
+              {/* <button className="bg-red-500 hover:bg-red-700 text-white font-bold px-2 rounded">
                   <MdIcons.MdDelete className='font-2xl text-white m-1'  />
-              </button>
+              </button> */}
             </>
           ),
         },
@@ -111,9 +115,9 @@ export default function AllCustomers() {
             <button onClick={() => navigate('/new_customer')} className="px-2 py-1 bg-green-600 rounded-md text-white text-sm font-medium">Add Customer</button>
             </div>
             {
-              customers.users?.data?.data?(
+              customers.customers?.data?.data?(
               <div className="w-11/12 mx-auto">
-                <ReactTable cols={columns} data={customers.users.data.data} />
+                <ReactTable cols={columns} data={customers.customers.data.data} />
             </div>
               )
               : 

@@ -1,13 +1,13 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 // import NavBar from '../navbar'
 import { useForm } from 'react-hook-form';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useNavigate } from 'react-router';
-import { useDispatch } from 'react-redux';
+import { useNavigate, useParams } from 'react-router';
+import { useDispatch, useSelector } from 'react-redux';
 // import { signupUser } from '../../store/actions/user_actions';
 import image from '../../assets/images/clinton.png'
-import { registerCustomer, signUpUser } from '../../store/actions/user_actions';
+import { getCustomerById, getUserById, signUpUser, updateCustomer } from '../../store/actions/user_actions';
 import SideNav from '../sideBar/sideNav';
 import NavBar from '../containers/header';
 
@@ -20,6 +20,14 @@ const schema = Yup.object({
     .string()
     .required()
     .trim(),
+    tin: Yup
+    .string()
+    .required()
+    .trim(),
+    vrn: Yup
+    .string()
+    .required()
+    .trim(),
     telephone : Yup
     .string()
     .required()
@@ -29,19 +37,30 @@ const schema = Yup.object({
     .required()
     .email()
     .trim(),
-    tin: Yup
-    .string()
-    .required(),
-    vrn : Yup
-    .string()
-    .required()
-    .trim()
+    
 })
 
-function AddCustomer () {
+function UpdateCustomer() {
 
     const navigate = useNavigate();
     const dispatch =  useDispatch()
+    const params = useParams();
+    const [reload, setReload] = useState(0);
+
+    const  user = useSelector(state =>  state.users)
+    // console.log(user.customer)
+
+    setTimeout(() => {
+        if(reload < 5){
+            setReload(reload  =>  reload + 1)
+        }
+    }, 1000);
+
+    useEffect(() => {
+        if(user &&  user.customer === null && reload <  3){
+            dispatch( getCustomerById(params.id) )
+        }
+    })
 
     const { register, handleSubmit, reset, formState : {errors, isValid, isDirty, isSubmitSuccessful} } = useForm({
         mode: 'all',
@@ -51,8 +70,9 @@ function AddCustomer () {
     })
 
     const onSubmit = data => {
-        // console.log(data)
-        dispatch( registerCustomer(data) )
+        data.id = params.id
+        console.log(data)
+        dispatch( updateCustomer(data) )
     }
 
 
@@ -62,10 +82,11 @@ function AddCustomer () {
                 firstName: '',
                 // middleName: '',
                 lastName: '',
+                vrn: '',
+                tin :'',
                 telephone: '',
                 email: '',
-                vrn: '',
-                tin : ''
+                
             })
         }
     })
@@ -77,20 +98,23 @@ function AddCustomer () {
           <NavBar  />
               {/* <NavBar /> */}
               <div className="bg-slate-50 py-10">
-                  <div className="mx-auto w-11/12 lg:w-7/12 xl:w-7/12">
+                  <div className="mx-auto w-11/12 lg:w-8/12 xl:w-8/12">
                       <div className="rounded-md shadow bg-white w-full">  
-                      <div className="w-32 h-32 mx-auto">
+                     {
+                        user?.customer?.data?.data?(
+                            <>
+                               <div className="w-32 h-32 mx-auto">
                                  <img src={image} alt="" className='h-32 w-32' />
                             </div>               
                           <div className="p-2">
-                              <p className="text-center text-3xl font-bold mb-4 text-sky-600">Add Customer</p>
+                              <p className="text-center text-3xl font-bold mb-4 text-sky-600">Update User</p>
                               <form onSubmit={handleSubmit(onSubmit)} className="py-2 px-1">
                             <div className="grid grid-cols-2 gap-1 w-full mx-auto mb-3">
                                       <div className="w-10/12 xsm:w-full sm:w-11/12 mx-auto">
                                     <label htmlFor="Firstname" className='text-sky-600'>Firstname</label> <br />
                                           <input type="text" placeholder='Firstname'
                                            className={`rounded-md w-11/12 border-2 focus:outline-none px-2 xl:py-2 lg:py-2 md:py-2 py-1 ${ errors.firstName? "border-red-500" : "border-sky-500" }  `}
-                                           defaultValue={""}
+                                           defaultValue={user.customer.data.data.firstName}
                                            {...register("firstName")}
                                      />
                                           <span className="text-red-500 text-sm">{ errors.firstName?.message }</span>
@@ -99,19 +123,44 @@ function AddCustomer () {
                               <label htmlFor="Lastname" className='text-sky-600'>Lastname</label> <br />
                                     <input type="text" placeholder='Lastname'
                                      className={`rounded-md w-11/12 border-2 focus:outline-none px-2 xl:py-2 lg:py-2 md:py-2 py-1 ${errors.lastName? "border-red-500" : "border-sky-500"} `}
-                                     defaultValue={""}
+                                     defaultValue={user.customer.data.data.lastName}
                                      {...register("lastName")}
                                />
                                     <span className="text-red-500 text-sm">{ errors.lastName?.message }</span>
                           </div>
                             </div>
+                            <div className="grid grid-cols-2 gap-1 w-full mx-auto mb-3">
+
                             
+
+                          <div className="w-10/12 xsm:w-full sm:w-11/12 mx-auto">
+                                    <label htmlFor="Telephone" className='text-sky-600'>TIN</label> <br />
+                                          <input type="tel" placeholder='tin'
+                                           className={`rounded-md w-11/12 border-2 focus:outline-none px-2 xl:py-2 lg:py-2 md:py-2 py-1 ${errors.tin?"border-red-500" : "border-sky-500"}`}
+                                           defaultValue={user.customer.data.data.tin}
+                                           {...register("tin")}
+                                     />
+                                          <span className="text-red-500 text-sm">{ errors.tin?.message }</span>
+                                </div>
+
+                                <div className="w-10/12 xsm:w-full sm:w-11/12 mx-auto">
+                              <label htmlFor="Lastname" className='text-sky-600'>VRN</label> <br />
+                                    <input type='text' name="" placeholder='User vrn'
+                                     className={`rounded-md w-11/12 border-2 focus:outline-none px-2 xl:py-2 lg:py-2 md:py-2 py-1 ${errors.vrn? "border-red-500" : "border-sky-500"} `}
+                                     defaultValue={user.customer.data.data.vrn}
+                                     {...register("vrn")}
+                                    />
+                               
+                                    <span className="text-red-500 text-sm">{ errors.vrn?.message }</span>
+                          </div>
+                          
+                            </div>
                             <div className="grid grid-cols-2 gap-1 w-full mx-auto mb-3">
                                       <div className="w-10/12 xsm:w-full sm:w-11/12 mx-auto">
                                     <label htmlFor="Telephone" className='text-sky-600'>Telephone</label> <br />
                                           <input type="tel" placeholder='Telephone'
                                            className={`rounded-md w-11/12 border-2 focus:outline-none px-2 xl:py-2 lg:py-2 md:py-2 py-1 ${errors.telephone?"border-red-500" : "border-sky-500"}`}
-                                           defaultValue={""}
+                                           defaultValue={user.customer.data.data.telephone}
                                            {...register("telephone")}
                                      />
                                           <span className="text-red-500 text-sm">{ errors.telephone?.message }</span>
@@ -120,32 +169,13 @@ function AddCustomer () {
                                     <label htmlFor="Email Address" className='text-sky-600'>Email Address</label> <br />
                                     <input type="text" placeholder='Email Address' 
                                               className={`rounded-md border-2 w-11/12 focus:outline-none px-2 xl:py-2 lg:py-2 md:py-2 py-1 ${errors.email?"border-red-500" : "border-sky-500"} `}
-                                     defaultValue={""}
+                                     defaultValue={user.customer.data.data.email}
                                      {...register("email")}
                                     />
                                     <span className="text-red-500 text-sm">{ errors.email?.message }</span>
                                 </div>
                             </div>
-                            <div className="grid grid-cols-2 gap-1 w-full mx-auto mb-3">
-                                      <div className="w-10/12 xsm:w-full sm:w-11/12 mx-auto">
-                                    <label htmlFor="Password" className='text-sky-600'>TIN</label> <br />
-                                          <input type="text" placeholder='Tin Number'
-                                           className={`rounded-md w-11/12 border-2 focus:outline-none px-2 xl:py-2 lg:py-2 md:py-2 py-1 ${errors.tin?"border-red-500" : "border-sky-500"} `}
-                                           defaultValue={""}
-                                           {...register("tin")}
-                                     />
-                                          <span className="text-red-500 text-sm">{ errors.tin?.message }</span>
-                                </div>
-                                <div className="w-10/12 xsm:w-full sm:w-11/12 mx-auto">
-                                    <label htmlFor="Confirm Password" className='text-sky-600'>VRN</label> <br />
-                                    <input type="text" placeholder='vrn' 
-                                              className={`rounded-md border-2 w-11/12  focus:outline-none px-2 xl:py-2 lg:py-2 md:py-2 py-1 ${errors.vrn?"border-red-500" : "border-sky-500"} `}
-                                     defaultValue={""}
-                                     {...register("vrn")}
-                                    />
-                                    <span className="text-red-500 text-sm">{ errors.vrn?.message }</span>
-                                </div>
-                            </div>
+                        
                             <div className="mx-auto w-9/12 py-4">            
                                   <button disabled={!isValid || !isDirty} style={{ width: '80%'}} className="rounded shadow px-2 mx-auto py-1 bg-sky-600 text-white font-medium">Submit</button>
                             </div>
@@ -157,6 +187,11 @@ function AddCustomer () {
                             </div> */}
                               </form>
                           </div>
+                            </>
+                        )
+                        : 
+                        <div className="py-2 text-lg font-medium text-center text-blue-400 animate-pulse"> Loading </div>
+                     }
                       </div>
                   </div>
               </div>
@@ -166,4 +201,4 @@ function AddCustomer () {
   )
 }
 
-export default AddCustomer
+export default UpdateCustomer

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useCart } from 'react-use-cart';
 import SideNav from '../sideBar/sideNav';
 import NavBar from '../containers/header';
@@ -8,14 +8,63 @@ import image from '../../assets/images/clinton.png'
 
 import ReactTable from './component/table_card';
 import { useNavigate } from 'react-router';
+import { useDispatch,useSelector } from 'react-redux';
+import { getCustomerById, getOurCustomers } from '../../store/actions/user_actions';
 
 export default function  CartPage() {
 
     const [hide,setHide] =  useState(true);
     const  navigate  = useNavigate();
     const [price,setPrice] =  useState("");
-    const [customerName, setCustomerName] =  useState("")
+    const [customerName, setCustomerName] =  useState(null)
+    
     const date = new Date();
+
+    // console.log(customerName)
+
+    const dispatch =  useDispatch();
+    const [reload, setReload] = useState(0);
+
+    const [showModal, setShowModal] = useState(false);
+    const [inputValue, setInputValue] = useState('');
+    const [itemId,setItemId] = useState('');
+
+  const handleInputChange = (e) => {
+    setInputValue(e.target.value);
+  };
+
+  
+  const handleOpenModal = (id) => {
+    setShowModal(true);
+    // console.log(id)
+    setItemId( getItem(id))
+    // getItem(id);
+  };
+
+  // console.log(itemId);
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
+
+
+    const  customers = useSelector(state =>  state.users)
+    // console.log(customers.customers)
+  
+
+    setTimeout(() => {
+        if(reload < 5){
+            setReload(reload  =>  reload + 1)
+        }
+    }, 1000);
+
+    useEffect(() => {
+        if(customers &&  customers.customers.length < 1 && reload <4){
+            dispatch( getOurCustomers());
+        }
+    })
+
+
 
     const {
         isEmpty,
@@ -24,10 +73,29 @@ export default function  CartPage() {
         items,
         updateItemQuantity,
         removeItem,
-        emptyCart
+        emptyCart,
+        updateItem,
+        getItem
       } = useCart();
 
-      console.log(items)
+      // console.log(items)
+
+      
+
+      const handleSubmit = (e) => {
+        e.preventDefault();
+        // Process the form data
+        // console.log(inputValue, itemId);
+    
+        updateItem(itemId.id, {
+          selling_price : inputValue,
+          price : (Number(inputValue) * Number(itemId.amount) ),
+          cartTotal : (Number(inputValue) * Number(itemId.amount) )
+        })
+        // Close the modal or perform any other action
+        setShowModal(false);
+      };
+    
 
     const printInvoice = () => {
         setHide(false);
@@ -79,11 +147,16 @@ export default function  CartPage() {
                     </div>
                     <div className="text-lg  text-sky-600 flex space-x-4">
                         <div className="text-green-700 font-bold">Bill To :</div>
-                        <div className="text-sky-600 text-lg capitalize font-light"> {customerName} </div>
+                        {
+                          customerName &&(
+                            <div className="text-sky-600 text-lg capitalize font-light"> {customerName} </div>
+                            )
+                          }
                     </div>
 
                     {
-                      hide &&(                     
+                      customers?.customers?.data?.data &&
+                     hide &&(                     
                     <div className="">
                           <div className="w-10/12 xsm:w-full sm:w-11/12 mx-auto">
                               <label htmlFor="Lastname" className='text-sky-600'>Select Customer</label> <br />
@@ -92,9 +165,12 @@ export default function  CartPage() {
                                      onChange = {(e) => setCustomerName(e.target.value) }
                               >
                                 <option value="">Select Sale Options</option>
-                                <option value="Cotton">Cotton</option>
-                                <option value="Cotton2">Cotton</option>
-                                <option value="Cotton1">Cotton</option>
+                                {
+                                  customers?.customers?.data?.data.map((item) =>(
+                                    <option key={item._id} value={`${item.firstName} ${item.lastName}`}>{item.firstName} {item.lastName} </option>
+                                  ))
+                                }
+                                
                               </select>
                           </div>
                           </div>
@@ -105,6 +181,41 @@ export default function  CartPage() {
             </div>
                 
             <div className="rounded-lg w-11/12 mx-auto shadow-lg my-3">
+            {showModal && 
+            
+            <>
+             <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 ">
+      <div className="bg-white rounded-lg p-6 w-4/12">
+        <form onSubmit={handleSubmit}>
+          <label htmlFor="">Selling Price</label> <br />
+          <input
+            type="text"
+            value={inputValue}
+            onChange={handleInputChange} 
+            className="border border-gray-300 rounded-md p-2 mb-4 w-full mx-auto"
+          />
+          <div className="flex justify-end">
+            <button
+              type="submit"
+              className="bg-blue-500 text-white py-2 px-4 rounded-md mr-2"
+            >
+              Submit
+            </button>
+            <button
+              type="button"
+              onClick={handleCloseModal}
+              className="bg-gray-300 text-gray-700 py-2 px-4 rounded-md"
+            >
+              Cancel
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+            </>
+            }
+
+
               <table className='w-full
               '>
                 <thead className='bg-sky-600 w-full'>
@@ -119,13 +230,13 @@ export default function  CartPage() {
                 <tbody>
                   {
                     items? items.map((item,index) =>(
-                      <tr  className="border-b border-slate-200 my-1">
+                      <tr key={item.id}  className="border-b border-slate-200 my-1">
                     <td className="px-2 py-1 text-slate-700 text-smm font-light"> {index + 1} </td>
                     <td className="px-2 py-1 text-slate-700 text-smm font-light">{item.productName}</td>
                     <td className="px-2 py-1 text-slate-700 text-smm font-light"> {item.amount} </td>
                     <td className="px-2 py-1 text-slate-700 text-smm font-light"> {item.unit} </td>
-                    <td onClick={() => (console.log('clicked'))} className="px-2 py-1 text-slate-700 text-smm font-light"> {item.selling_price} </td>
-                    <td className="px-2 py-1 text-slate-700 text-smm font-light"> {item.price} </td>
+                    <td onClick={(e) => handleOpenModal(item.id)} className="px-2 py-1 text-slate-700 text-smm font-light"> {item.selling_price} </td>
+                    <td className="px-2 py-1 text-slate-700 text-smm font-light">{ Number(item.selling_price) * Number(item.amount) } </td>
                     {/* <td className="px-2 py-1 text-slate-700 text-smm font-light"></td> */}
                   </tr>
                     ))
@@ -216,3 +327,56 @@ export default function  CartPage() {
     </div>
   )
 }
+
+
+// function Modal() {
+//   const [inputValue, setInputValue] = useState('');
+
+//   const handleInputChange = (e) => {
+//     setInputValue(e.target.value);
+//   };
+
+//   const handleSubmit = (e) => {
+//     e.preventDefault();
+//     // Process the form data
+//     console.log(inputValue);
+//     // Close the modal or perform any other action
+//     setShowModal(false);
+//   };
+
+//   const handleCancel = () => {
+//     // Close the modal or perform any other action
+//     setShowModal(false);
+//   };
+
+//   return (
+//     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+//       <div className="bg-white rounded-lg p-6">
+//         <form onSubmit={handleSubmit}>
+//           <input
+//             type="text"
+//             value={inputValue}
+//             onChange={handleInputChange}
+//             className="border border-gray-300 rounded-md p-2 mb-4"
+//           />
+//           <div className="flex justify-end">
+//             <button
+//               type="submit"
+//               className="bg-blue-500 text-white py-2 px-4 rounded-md mr-2"
+//             >
+//               Submit
+//             </button>
+//             <button
+//               type="button"
+//               onClick={handleCancel}
+//               className="bg-gray-300 text-gray-700 py-2 px-4 rounded-md"
+//             >
+//               Cancel
+//             </button>
+//           </div>
+//         </form>
+//       </div>
+//     </div>
+//   );
+// }
+

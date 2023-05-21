@@ -21,6 +21,7 @@ import SaleProduct from './components/admin/sale_page';
 import SalesData from './components/admin/salesData';
 import Reports from './components/admin/reports';
 import AddCustomer from './components/admin/add_customer';
+import UpdateCustomer from './components/admin/updateCustomer';
 
 function App() {
   return (
@@ -46,7 +47,8 @@ function App() {
              <Route path='/new_dependant' element={ <ProtectedRoute>  <DependantRequest />  </ProtectedRoute>} />
              <Route path='/staffs' element={<ProtectedRoute>  <AllStaffs /> </ProtectedRoute> } />
              <Route path='/customers' element={ <ProtectedRoute>  <AllCustomers />  </ProtectedRoute>} />
-             <Route  path='/customer/:id' element={ <ProtectedRoute> <UpdateUser/> </ProtectedRoute> } />
+             <Route  path='/staff/:id' element={ <ProtectedRoute> <UpdateUser/> </ProtectedRoute> } />
+             <Route  path='/customer/:id' element={ <ProtectedRoute> <UpdateCustomer/> </ProtectedRoute> } />
           </Routes>
           </AuthProvider>
        </BrowserRouter>

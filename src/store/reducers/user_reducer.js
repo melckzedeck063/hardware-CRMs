@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getAllCustomers, getAllStaffs, getDashboardSummary, getUserById, signInUser, signUpUser, updateUser } from "../actions/user_actions";
+import { getAllCustomers, getAllStaffs, getCustomerById, getDashboardSummary, getOurCustomers, getUserById, registerCustomer, signInUser, signUpUser, updateCustomer, updateUser } from "../actions/user_actions";
 
 
 export const userSlice = createSlice({
@@ -8,6 +8,8 @@ export const userSlice = createSlice({
         loged_user : null,
         current_user : null,
         users : [],
+        customers : [],
+        customer : null,
         dashboard  : null,
         staffs : [],
         status :  '',
@@ -115,6 +117,61 @@ export const userSlice = createSlice({
             state.dashboard = action.payload
         })
         .addCase(getDashboardSummary.rejected, (state,action) => {
+            state.status = "Failed";
+            state.message = "Request  failed please try again";
+            state.error = action.error.message
+        })
+        .addCase(registerCustomer.pending,(state,action) => {
+            state.status = "Loading"
+        })
+        .addCase(registerCustomer.fulfilled, (state,action) => {
+            state.status = "Successfull";
+            state.message = "User data updated succesfully ";
+            state.customer = action.payload
+        })
+        .addCase(registerCustomer.rejected, (state,action) => {
+            state.status = "Failed";
+            state.message = "Request  failed please try again";
+            state.error = action.error.message
+        })
+
+        .addCase(getOurCustomers.pending,(state,action) => {
+            state.status = "Loading"
+        })
+        .addCase(getOurCustomers.fulfilled, (state,action) => {
+            state.status = "Successfull";
+            state.message = "User data updated succesfully ";
+            state.customers = action.payload
+        })
+        .addCase(getOurCustomers.rejected, (state,action) => {
+            state.status = "Failed";
+            state.message = "Request  failed please try again";
+            state.error = action.error.message
+        })
+
+        .addCase(getCustomerById.pending,(state,action) => {
+            state.status = "Loading"
+        })
+        .addCase(getCustomerById.fulfilled, (state,action) => {
+            state.status = "Successfull";
+            state.message = "User data updated succesfully ";
+            state.customer = action.payload
+        })
+        .addCase(getCustomerById.rejected, (state,action) => {
+            state.status = "Failed";
+            state.message = "Request  failed please try again";
+            state.error = action.error.message
+        })
+
+        .addCase(updateCustomer.pending,(state,action) => {
+            state.status = "Loading"
+        })
+        .addCase(updateCustomer.fulfilled, (state,action) => {
+            state.status = "Successfull";
+            state.message = "User data updated succesfully ";
+            state.customer = action.payload
+        })
+        .addCase(updateCustomer.rejected, (state,action) => {
             state.status = "Failed";
             state.message = "Request  failed please try again";
             state.error = action.error.message
