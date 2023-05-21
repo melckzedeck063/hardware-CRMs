@@ -15,8 +15,21 @@ import { useNavigate } from 'react-router';
 export default function AllProducts() {
 
   const [reload, setReload] =   useState(0);
+  const [role, setRole] = useState(null);
   const dispatch =  useDispatch();
   const navigate =  useNavigate();
+
+  const permission = sessionStorage.getItem('token');
+   const user_role= JSON.parse(permission);
+   
+  //  console.log(user_role)
+  setTimeout(() => {
+    if(user_role !== undefined || user_role !== null){
+      setRole(user_role.doc.user.role)
+    }
+  }, 2500);
+
+  //  console.log(role);
 
   const products  =  useSelector(state => state.products);
 
@@ -143,6 +156,9 @@ export default function AllProducts() {
             {
               products?.products?.data?(
                 <>
+                {
+                  role === 'admin'?(
+                    <>
               <button onClick={() => handleEditClick(row.original._id)} className="bg-blue-500 hover:bg-blue-700 text-white font-bold px-2 rounded mr-2">
                  <FaIcons.FaEdit className='font-2xl text-white m-1'  />
               </button>
@@ -152,6 +168,16 @@ export default function AllProducts() {
               <button className="bg-red-500 hover:bg-red-700 text-white font-bold px-2 rounded">
                   <MdIcons.MdDelete className='font-2xl text-white m-1' />
               </button>
+                    </>
+                  )
+                  :
+                  <>
+              <button onClick={() => handleSalesClick(row.original._id)} className="bg-amber-400 hover:bg-amber-500 text-white font-bold px-2 rounded mr-2">
+                 <BiIcons.BiPurchaseTag className='font-2xl text-white m-1  rotate-90'  />
+              </button>
+                  </>
+                }
+
                 </>
               )
               : 
@@ -185,26 +211,19 @@ export default function AllProducts() {
           <NavBar  />
           <div className='py-2'>
             <div className="text-2xl text-sky-600 text-center font-bold">All Products</div>
-            {/* search item  */}
-               <div className={`rounded-md flex  mt-2 bg-transparent border-2 border-slate-400 py-1 h-8 px-3 w-5/12 mx-auto mr-10 `}>
-                        <MdIcons.MdSearch className='text-slate-600 mt-0.5 text-lg' />
-                        <input type="text" className='focus:outline-none px-1 py-1'
-                         placeholder='Search by name'
-                         value={searchQuery} onChange={handleSearchQueryChange}
-                        />
-                </div>
+            
 
             {
               products?.products?.data?(
                 <>
              <div className="w-11/12 mx-auto">
-                <ReactTable cols={columns} data={products.products.data} />
+                <ReactTable columns={columns} data={products.products.data} />
              </div>
                 </>
               )
               :   
             <div className="w-11/12 mx-auto">
-                <ReactTable cols={columns} data={data} />
+                <ReactTable columns={columns} data={data} />
             </div>
             }
           </div>

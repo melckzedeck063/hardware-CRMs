@@ -151,11 +151,11 @@ const data = [
                         <div className="font-bold text-sky-600 text-lg text-right">Sales Record</div>
                         {
                           sales?.all_sales?.data?.all_sales?(
-                            <ReactTable cols={columns} data={sales.all_sales.data.all_sales}/>
+                            <ReactTable columns={columns} data={sales.all_sales.data.all_sales}/>
                           )
                           : 
                           <>
-                          <ReactTable cols={columns} data={data}/>
+                          <ReactTable columns={columns} data={data}/>
                           </>
                         }
                         </div>

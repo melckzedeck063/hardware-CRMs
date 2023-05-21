@@ -113,13 +113,13 @@ export default function AllStaffs() {
             {
               customers.users?.data?.data?(
               <div className="w-11/12 mx-auto">
-                <ReactTable cols={columns} data={customers.users.data.data} />
+                <ReactTable columns={columns} data={customers.users.data.data} />
             </div>
               )
               : 
               <>
               <div className="w-11/12 mx-auto">
-                <ReactTable cols={columns} data={data} />
+                <ReactTable columns={columns} data={data} />
             </div>
             </>
             }

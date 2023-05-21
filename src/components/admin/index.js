@@ -4,6 +4,7 @@ import { useState,useEffect } from 'react';
 // import * as BsIcons from 'react-icons/bs';
 // import * as HiIcons from 'react-icons/hi'
 import * as FaIcons from 'react-icons/fa'
+import image from '../../assets/images/clinton.png'
 
 // import { useDispatch, useSelector } from 'react-redux';
 // import SideNav from '../sideBar/sideNav';
@@ -64,16 +65,22 @@ useEffect(() => {
           <SideNav />
           
           
-          <div  className="w-full bg-slate-200">
+          <div  className="w-full bg-slatee-50">
             {/* <AdminHeader /> */}
             <NavBar  />
             
             <div className="w-full p-4 xl:p-5 lg:p-6 md:p-5 mx-auto py-12">
+              <div className="grid grid-cols-2 w-10/12 mx-auto">
+                <div className="text-green-700 font-bold mt-10 text-3xl">Hello! Welcome to </div>
+                <div className="">
+                  <img src={image} className='h-40 w-full -mt-4' alt="" />
+                </div>
+              </div>
             <div className="mx-auto">
                 {
                   dash_summary?.dashboard ? (
                   dash_summary?.dashboard && dash_summary.dashboard.empty === false ? (
-              <div className="grid grid-cols-1 gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 w-11/12 mx-auto mb-4">
+              <div className="grid xsm:grid-cols-1 gap-6 sm:grid-cols-1 grid-cols-2  w-11/12 mx-auto mb-4">
                   <DashCard heading={"AVAILABLE PRODUCTS"} data={dash_summary.dashboard.data.product_data[0].total_products} />
                   <DashCard heading={"SOLD PRODUCTS"} data={0} />
                   <DashCard heading={"AVAILABLE PRODUCTS"} data={0}/>
