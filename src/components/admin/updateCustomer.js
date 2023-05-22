@@ -22,11 +22,9 @@ const schema = Yup.object({
     .trim(),
     tin: Yup
     .string()
-    .required()
     .trim(),
     vrn: Yup
     .string()
-    .required()
     .trim(),
     telephone : Yup
     .string()
@@ -34,7 +32,6 @@ const schema = Yup.object({
     .trim(),
     email: Yup
     .string()
-    .required()
     .email()
     .trim(),
     

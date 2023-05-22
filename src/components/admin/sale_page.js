@@ -79,6 +79,12 @@ function SaleProduct() {
         }
     }, 1000);
 
+    setTimeout(() => {
+        if(reload < 3){
+            window.location.reload(false);
+        }
+    }, 1000);
+
     useEffect(() => {
         if(product && product.current_product === null && reload < 3){
             dispatch( getProductById(params.id) )
@@ -115,16 +121,16 @@ function SaleProduct() {
     useEffect(() => {
         if (isSubmitSuccessful) {
             reset({
-                // productName: '',
-                // // middleName: '',
-                // buyingPrice: '',
-                // price: '',
-                // amount: '',
-                // unit: '',
-                // total_cost: '',
-                // quantity : '',
-                // price : '',
-                // added_price :''
+                productName: '',
+                // middleName: '',
+                buyingPrice: '',
+                price: '',
+                amount: '',
+                unit: '',
+                total_cost: '',
+                quantity : '',
+                price : '',
+                added_price :''
 
 
             })
