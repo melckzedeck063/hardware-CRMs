@@ -134,7 +134,7 @@ export default function  CartPage() {
             {/* <div className="text-2xl text-sky-600 text-center font-bold">
                <img src={image} alt="" className='h-32 w-52 mx-auto' />
             </div> */}
-            <div className="flex justify-between  w-10/12 mx-auto">
+            <div className="flex justify-between xl:w-10/12  w-11/12 mx-auto">
                 <div className="-ml-8">
                 <img src={image} alt="" className='h-48 w-64 -ml-7 mx-auto -mt-1' />
 
@@ -146,7 +146,7 @@ export default function  CartPage() {
                 </div>
 
                 <div className="">
-                  <div className="text-slate-500 text-2xl font-medium mt-20 -ml-4">
+                  <div className="text-slate-500 xl:text-2xl lg:text-xl text-lg font-medium mt-20 -ml-4 ">
                     PROFORMA INVOICE 
                   </div>
                 </div>
