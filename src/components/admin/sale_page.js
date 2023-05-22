@@ -79,11 +79,7 @@ function SaleProduct() {
         }
     }, 1000);
 
-    setTimeout(() => {
-        if(reload < 3){
-            window.location.reload(false);
-        }
-    }, 1000);
+
 
     useEffect(() => {
         if(product && product.current_product === null && reload < 3){
@@ -111,8 +107,10 @@ function SaleProduct() {
         // console.log(data)
         dispatch( saleNow(data) );
         addItem(data);
+        
 
         setTimeout(() => {
+            window.location.reload(false)
            navigate('/cart')
         }, 3000);
     }
