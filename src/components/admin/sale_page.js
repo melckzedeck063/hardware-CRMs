@@ -108,9 +108,8 @@ function SaleProduct() {
         dispatch( saleNow(data) );
         addItem(data);
         
-
         setTimeout(() => {
-            window.location.reload(false)
+            // window.location.reload(false)
            navigate('/cart')
         }, 3000);
     }
