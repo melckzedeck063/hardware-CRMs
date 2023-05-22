@@ -147,7 +147,7 @@ export default function  CartPage() {
 
                 <div className="">
                   <div className="text-slate-500 xl:text-2xl lg:text-xl text-lg font-medium mt-20 -ml-4 ">
-                    PROFORMA INVOICE 
+                    TAX INVOICE 
                   </div>
                 </div>
                 <div className="mt-14">
