@@ -42,7 +42,6 @@ const schema = Yup.object({
     .trim(),
     price : Yup
     .string()
-    .required()
     .trim(),
    unit: Yup
     .string()
@@ -51,6 +50,9 @@ const schema = Yup.object({
     quantity : Yup
     .string()
     .required()
+    .trim(),
+    added_price : Yup
+    .string()
     .trim()
 })
 
@@ -58,7 +60,7 @@ function SaleProduct() {
 
     const navigate = useNavigate();
     const [reload , setReload] = useState(0);
-    // const [productunit, setProductDiscount] = useState(0);
+    const [addedPrice, setAddedPrice] = useState(0);
     const [productAmount, setProductAmount] = useState(0)
     const [productPrice, setProductPrice] =  useState(0);
     // const [file, setFile] = useState("");
@@ -91,15 +93,16 @@ function SaleProduct() {
     })
 
     const calcCost = ( cost) => {
-        return (cost * productAmount);
+        return ((cost * productAmount) + (addedPrice * productAmount ));
     }
 
-    const total =  (productPrice *  productAmount);
+    const total =  ((productPrice *  productAmount) + (addedPrice * productAmount ));
 
     const onSubmit = data => {
         data.id = params.id
         data.price =  total;
-        console.log(data)
+
+        // console.log(data)
         dispatch( saleNow(data) );
         addItem(data);
 
@@ -112,14 +115,16 @@ function SaleProduct() {
     useEffect(() => {
         if (isSubmitSuccessful) {
             reset({
-                productName: '',
-                // middleName: '',
-                buyingPrice: '',
-                price: '',
-                amount: '',
-                unit: '',
-                total_cost: '',
-                quantity : ''
+                // productName: '',
+                // // middleName: '',
+                // buyingPrice: '',
+                // price: '',
+                // amount: '',
+                // unit: '',
+                // total_cost: '',
+                // quantity : '',
+                // price : '',
+                // added_price :''
 
 
             })
@@ -167,17 +172,12 @@ function SaleProduct() {
 
                             <div className="w-10/12 xsm:w-full sm:w-11/12 mx-auto">
                               <label htmlFor="Lastname" className='text-sky-600'>Selling Price</label> <br />
-                              <select name="" id=""
+                              <input name="" id=""
                                      className={`rounded-md w-11/12 border-2 focus:outline-none px-2 xl:py-2 lg:py-2 md:py-2 py-1 ${errors.selling_price? "border-red-500" : "border-sky-500"} `}
                                      defaultValue={""}
                                      {...register("selling_price")}
                                      onChange = {(e) => setProductPrice(e.target.value ) }
-                              >
-                                <option value="">Select Sale Options</option>
-                                <option value={product.current_product.data.memberPrice}>Member  Price</option>
-                                <option value={product.current_product.data.wholeSale}>Whole Sale</option>
-                                <option value={product.current_product.data.sellingPrice}>Sales Price</option>
-                              </select>
+                              />
                                     <span className="text-red-500 text-sm">{ errors.selling_price?.message }</span>
                           </div>
 
@@ -191,13 +191,36 @@ function SaleProduct() {
                                      />
                                           <span className="text-red-500 text-sm">{ errors.amount?.message }</span>
                                 </div>
+                            
                             </div>
+
+                            {/* <div className="grid grid-cols-2 gap-1 w-full mx-auto mb-3">
+
+                                <input type="hidden" placeholder='Units ' 
+                                            //   className={`rounded-md border-2 w-11/12 focus:outline-none px-2 xl:py-2 lg:py-2 md:py-2 py-1 ${errors.unit?"border-red-500" : "border-sky-500"} `}
+                                     defaultValue={product.current_product.data.quantity}
+                                     {...register("quantity")}
+                                    />
+
+                                      <div className="w-10/12 xsm:w-full sm:w-11/12 mx-auto">
+                                    <label htmlFor="quantity" className='text-sky-600'>Total Cost</label> <br />
+                                          <input type="tel" placeholder='total_cost'
+                                           className={`rounded-md w-11/12 border-2 focus:outline-none px-2 xl:py-2 lg:py-2 md:py-2 py-1 ${errors.price?"border-red-500" : "border-sky-500"}`}
+                                           defaultValue={""}
+                                           value={calcCost(productPrice)}
+                                           {...register("price")}
+                                     />
+                                          <span className="text-red-500 text-sm">{ errors.price?.message }</span>
+                                </div>
+                                
+                            </div> */}
+
                             <div className="grid grid-cols-2 gap-1 w-full mx-auto mb-3">
                             <div className="w-10/12 xsm:w-full sm:w-11/12 mx-auto">
                                     <label htmlFor="supplier Address" className='text-sky-600'>Units</label> <br />
                                     <input type="text" placeholder='Units ' 
                                               className={`rounded-md border-2 w-11/12 focus:outline-none px-2 xl:py-2 lg:py-2 md:py-2 py-1 ${errors.unit?"border-red-500" : "border-sky-500"} `}
-                                     defaultValue={product.current_product.data.unit}
+                                     defaultValue={""}
                                      {...register("unit")}
                                     />
                                     <span className="text-red-500 text-sm">{ errors.unit?.message }</span>

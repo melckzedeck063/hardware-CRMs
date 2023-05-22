@@ -6,6 +6,12 @@ import * as FaIcons from 'react-icons/fa';
 import * as MdIcons from 'react-icons/md' 
 import image from '../../assets/images/clinton.png'
 
+import image1 from '../../assets/images/olivia.png'
+import image4 from '../../assets/images/panasonic.png'
+import image5 from '../../assets/images/2109012.png'
+import image2 from '../../assets/images/africab-side.png'
+import image3 from '../../assets/images/tronic.png'
+
 import ReactTable from './component/table_card';
 import { useNavigate } from 'react-router';
 import { useDispatch,useSelector } from 'react-redux';
@@ -105,7 +111,7 @@ export default function  CartPage() {
 
         setTimeout(() => {
            emptyCart()
-        }, 60000);
+        }, 10000);
       }
 
     
@@ -130,20 +136,32 @@ export default function  CartPage() {
             </div> */}
             <div className="flex justify-between  w-10/12 mx-auto">
                 <div className="-ml-8">
-                <img src={image} alt="" className='h-48 w-64 mx-auto -mt-1' />
+                <img src={image} alt="" className='h-48 w-64 -ml-7 mx-auto -mt-1' />
+
+                <div className="my-1.5 -mt-8">
+                      <div className="text-slate-700">P.O.BOX 1997 Dodoma</div>
+                      <div className="text-slate-700">TIN : <span className="text-sky-600">133-457-615</span></div>
+                      <div className="text-slate-700">LOCATION : <span className="text-sky-600">Dodoma 9<sup>th</sup> Road opposite Kidia Hotel </span></div>
+                    </div>
+                </div>
+
+                <div className="">
+                  <div className="text-slate-500 text-2xl font-medium mt-20 -ml-4">
+                    PROFORMA INVOICE 
+                  </div>
                 </div>
                 <div className="mt-14">
                   <div className="flex space-x-4">
                     <div className="text-sky-600 font-bold">Email :</div> 
-                    <div className="text-sky-600 font-mediumm">clinton@solution.co.tz</div>
+                    <div className="text-sky-600 font-mediumm">clintonelectricalsolution@gmail.com</div>
                   </div>
                   <div className="flex space-x-4">
                     <div className="text-sky-600 font-bold">Phone :</div>
-                    <div className="text-sky-600 font-medium">0744327867</div>
+                    <div className="text-sky-600 font-medium">0788019895 / 0755905957</div>
                   </div>
                     <div className="flex space-x-4">
                     <div className="text-sky-600 font-bold">Date :</div>                     
-                    <div className="text-sky-600 font-medium"> {date.getDate() }-{date.getMonth()}-{ date.getFullYear() } </div>
+                    <div className="text-sky-600 font-medium"> {date.getDate() }-{date.getMonth() + 1}-{ date.getFullYear() } </div>
                     </div>
                     <div className="text-lg  text-sky-600 flex space-x-4">
                         <div className="text-green-700 font-bold">Bill To :</div>
@@ -152,6 +170,10 @@ export default function  CartPage() {
                             <div className="text-sky-600 text-lg capitalize font-light"> {customerName} </div>
                             )
                           }
+                    </div>
+                    <div className="text-lg  text-sky-600 flex space-x-4">
+                        <div className="text-green-700 font-bold">Perfoma No : </div>
+                        <div className="text-sky-600 text-lg capitalize font-light"> { `${date.getDate()}-${date.getMonth()+1}-${date.getHours() }${date.getMinutes()}` } </div>
                     </div>
 
                     {
@@ -231,10 +253,10 @@ export default function  CartPage() {
                   {
                     items? items.map((item,index) =>(
                       <tr key={item.id}  className="border-b border-slate-200 my-1">
-                    <td className="px-2 py-1 text-slate-700 text-smm font-light"> {index + 1} </td>
-                    <td className="px-2 py-1 text-slate-700 text-smm font-light">{item.productName}</td>
-                    <td className="px-2 py-1 text-slate-700 text-smm font-light"> {item.amount} </td>
-                    <td className="px-2 py-1 text-slate-700 text-smm font-light"> {item.unit} </td>
+                    <td className="px-2 py-1 text-slate-800 text-smm font-light"> {index + 1} </td>
+                    <td className="px-2 py-1 text-slate-800 text-smm font-light">{item.productName}</td>
+                    <td className="px-2 py-1 text-slate-800 text-smm font-light"> {item.amount} </td>
+                    <td className="px-2 py-1 text-slate-800 text-smm font-light"> {item.unit} </td>
                     <td onClick={(e) => handleOpenModal(item.id)} className="px-2 py-1 text-slate-700 text-smm font-light"> {item.selling_price} </td>
                     <td className="px-2 py-1 text-slate-700 text-smm font-light">{ Number(item.selling_price) * Number(item.amount) } </td>
                     {/* <td className="px-2 py-1 text-slate-700 text-smm font-light"></td> */}
@@ -266,6 +288,7 @@ export default function  CartPage() {
                       All goods remain the property of <span className="text-sky-600 font-medium">Clinton Electrical Solution.</span>
                       Until payment has been received in full
                     </div>
+                   
                   </div>
 
                   <div className="">
@@ -286,24 +309,24 @@ export default function  CartPage() {
                   </div>
 
                 </div>
-                <div className="flexx justifyx-between w-10/12 grid mx-auto grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-3 xsm:grid-cols-2">
+                <div className="w-11/12 grid mx-auto grid-cols-5 my-2">
                 <div className="text-2xl text-sky-600 text-center font-bold">
-               <img src={image} alt="" className='h-32 w-36 mx-auto' />
+               <img src={image1} alt="" className='h-38 w-11/12 mx-auto' />
                 </div>
 
                 <div className="text-2xl text-sky-600 text-center font-bold">
-               <img src={image} alt="" className='h-32 w-36 mx-auto' />
+               <img src={image2} alt="" className='h-38 mt-6 w-11/12 mx-auto' />
             </div>
 
             <div className="text-2xl text-sky-600 text-center font-bold">
-               <img src={image} alt="" className='h-32 w-36 mx-auto' />
+               <img src={image5} alt="" className='h-20 mt-2 w-11/12 mx-auto' />
+            </div>
+            <div className="text-2xl text-sky-600 text-center font-bold">
+               <img src={image3} alt="" className='h-32 w-11/12 mx-auto' />
             </div>
 
             <div className="text-2xl text-sky-600 text-center font-bold">
-               <img src={image} alt="" className='h-32 w-36 mx-auto' />
-            </div>
-            <div className="text-2xl text-sky-600 text-center font-bold">
-               <img src={image} alt="" className='h-32 w-36 mx-auto' />
+               <img src={image4} alt="" className='h-32  w-11/12 mx-auto' />
             </div>
                 </div>
               </div>
