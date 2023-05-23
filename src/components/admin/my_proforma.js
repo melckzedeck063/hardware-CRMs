@@ -17,7 +17,7 @@ import { useNavigate } from 'react-router';
 import { useDispatch,useSelector } from 'react-redux';
 import { getCustomerById, getOurCustomers } from '../../store/actions/user_actions';
 
-export default function  CartPage() {
+export default function  MyProforma() {
 
     const [hide,setHide] =  useState(true);
     const  navigate  = useNavigate();
@@ -134,7 +134,7 @@ export default function  CartPage() {
             {/* <div className="text-2xl text-sky-600 text-center font-bold">
                <img src={image} alt="" className='h-32 w-52 mx-auto' />
             </div> */}
-            <div className="flex justify-between xl:w-10/12  w-11/12 mx-auto">
+            <div className="flex justify-between  w-10/12 mx-auto">
                 <div className="-ml-8">
                 <img src={image} alt="" className='h-48 w-64 -ml-7 mx-auto -mt-1' />
 
@@ -149,11 +149,11 @@ export default function  CartPage() {
                 </div>
 
                 <div className="">
-                  <div className="text-slate-500 xl:text-2xl lg:text-xl text-lg font-medium mt-20 -ml-4 ">
-                    TAX INVOICE 
+                  <div className="text-slate-500  text-xl font-medium mt-20 -ml-4 ">
+                    PROFORMA INVOICE 
                   </div>
                 </div>
-                <div className="mt-14">
+                <div className="mt-16">
                   <div className="flex space-x-4">
                     <div className="text-sky-600 font-bold">Email :</div> 
                     <div className="text-sky-600 font-mediumm">clintonelectricalsolution@gmail.com</div>
@@ -205,7 +205,7 @@ export default function  CartPage() {
                 
             </div>
                 
-            <div className="rounded-lg w-11/12 mx-auto shadow-lgg my-3">
+            <div className="rounded-lg w-11/12 mx-auto shadow-smm my-3">
             {showModal && 
             
             <>
@@ -340,7 +340,7 @@ export default function  CartPage() {
                         hide &&(
                           <div className="flex space-x-6 w-10/12 mx-auto">
                           <button onClick={() => navigate('/products')} className='bg-green-700 rounded-lg py-1 px-2 text-white font-medium'>Add Item</button>
-                          <button onClick={() => printInvoice()} className='bg-sky-600 rounded-lg py-1 px-2 text-white font-medium'>Generate  Invoice</button>
+                          <button onClick={() => printInvoice()} className='bg-sky-600 rounded-lg py-1 px-2 text-white font-medium'>Generate  Perfoma</button>
                            
                            
                          </div>

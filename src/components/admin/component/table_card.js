@@ -236,7 +236,7 @@ function ReactTable({ columns, data }) {
 
   return (
     <>
-    <div className="className='shadow-md rounded-md py-2 bg-slate-50">
+    <div className="shadow-md rounded-md py-2 bg-slate-50">
       <div className="right-2 border border-slate-300 w-5/12 my-1 rounded-md px-2 py-0.5">
       <GlobalFilter
                 preGlobalFilteredRows={preGlobalFilteredRows}

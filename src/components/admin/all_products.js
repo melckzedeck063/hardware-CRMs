@@ -79,6 +79,10 @@ export default function AllProducts() {
     console.log('sale button clicked for ID:', id);
      navigate(`/sale_product/${id}`);
   };
+  const handleProformaClick = (id) => {
+    console.log('sale button clicked for ID:', id);
+     navigate(`/proforma/${id}`);
+  };
 
   const handleDeleteClick = (id) => {
     console.log('Delete button clicked for ID:', id);
@@ -165,6 +169,9 @@ export default function AllProducts() {
               <button onClick={() => handleSalesClick(row.original._id)} className="bg-amber-400 hover:bg-amber-500 text-white font-bold px-2 rounded mr-2">
                  <BiIcons.BiPurchaseTag className='font-2xl text-white m-1  rotate-90'  />
               </button>
+              <button onClick={() => handleProformaClick(row.original._id)} className="bg-green-500 hover:bg-green-600 text-white font-bold px-2 rounded mr-2">
+                 <BiIcons.BiPurchaseTag className='font-2xl text-white m-1  rotate-90'  />
+              </button>
               <button className="bg-red-500 hover:bg-red-700 text-white font-bold px-2 rounded">
                   <MdIcons.MdDelete className='font-2xl text-white m-1' />
               </button>
@@ -173,6 +180,9 @@ export default function AllProducts() {
                   :
                   <>
               <button onClick={() => handleSalesClick(row.original._id)} className="bg-amber-400 hover:bg-amber-500 text-white font-bold px-2 rounded mr-2">
+                 <BiIcons.BiPurchaseTag className='font-2xl text-white m-1  rotate-90'  />
+              </button>
+              <button onClick={() => handleProformaClick(row.original._id)} className="bg-green-500 hover:bg-green-600 text-white font-bold px-2 rounded mr-2">
                  <BiIcons.BiPurchaseTag className='font-2xl text-white m-1  rotate-90'  />
               </button>
                   </>

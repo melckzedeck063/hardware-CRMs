@@ -22,6 +22,8 @@ import SalesData from './components/admin/salesData';
 import Reports from './components/admin/reports';
 import AddCustomer from './components/admin/add_customer';
 import UpdateCustomer from './components/admin/updateCustomer';
+import ProformaPage from './components/admin/proforma_page';
+import MyProforma from './components/admin/my_proforma';
 
 function App() {
   return (
@@ -40,8 +42,10 @@ function App() {
              <Route path='/new_product' element={ <ProtectedRoute> <NewRequest /> </ProtectedRoute> } />
              <Route path='/product/:id' element={ <ProtectedRoute> <UpdateProduct /> </ProtectedRoute> } />
              <Route path='/sale_product/:id' element={ <ProtectedRoute> <SaleProduct /> </ProtectedRoute> } />
+             <Route path='/proforma/:id' element={ <ProtectedRoute> <ProformaPage /> </ProtectedRoute> } />
              <Route path='/sales' element={ <ProtectedRoute> <SalesData /> </ProtectedRoute> } />
              <Route path='/cart' element={ <ProtectedRoute> <CartPage /> </ProtectedRoute> } />
+             <Route path='/proforma' element={ <ProtectedRoute> <MyProforma /> </ProtectedRoute> } />
              <Route path='/reports' element={ <ProtectedRoute> <Reports /> </ProtectedRoute> } />
              <Route path='/dependants' element={ <ProtectedRoute>  <MyDependants />  </ProtectedRoute> } />
              <Route path='/new_dependant' element={ <ProtectedRoute>  <DependantRequest />  </ProtectedRoute>} />
