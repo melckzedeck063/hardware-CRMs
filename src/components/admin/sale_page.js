@@ -81,11 +81,12 @@ function SaleProduct() {
 
 
 
-    useEffect(() => {
-        if(product && product.current_product === null && reload < 3){
-            dispatch( getProductById(params.id) )
-        }
-    })
+
+    // useEffect(() => {
+    //     if(product && product.current_product.length < 1 && reload < 3){
+    //         dispatch( getProductById(params.id) )
+    //     }
+    // })
 
     const { register, handleSubmit, reset, formState : {errors, isValid, isDirty, isSubmitSuccessful} } = useForm({
         mode: 'all',
@@ -140,7 +141,7 @@ function SaleProduct() {
           <div className='w-full'>
               <NavBar />
               <div className="bg-slate-50 py-10">
-                  <div className="mx-auto w-11/12 lg:w-8/12 xl:w-8/12">
+                  <div className="mx-auto w-9/12 lg:w-8/12 xl:w-8/12">
                       <div className="rounded-md shadow bg-white w-full">  
                           {
                             product?.current_product?.data?(

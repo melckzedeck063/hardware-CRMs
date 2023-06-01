@@ -8,7 +8,7 @@ import * as MdIcons from 'react-icons/md'
 import * as BiIcons from 'react-icons/bi';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllProducts } from '../../store/actions/product_actions';
+import { getAllProducts, getProductById } from '../../store/actions/product_actions';
 import moment from 'moment';
 import { useNavigate } from 'react-router';
 
@@ -77,11 +77,21 @@ export default function AllProducts() {
 
   const handleSalesClick = (id) => {
     console.log('sale button clicked for ID:', id);
-     navigate(`/sale_product/${id}`);
+
+    dispatch(getProductById(id))
+    
+    setTimeout(() => { 
+      navigate(`/sale_product/${id}`);
+    }, 2500);
   };
   const handleProformaClick = (id) => {
-    console.log('sale button clicked for ID:', id);
-     navigate(`/proforma/${id}`);
+    console.log('proforma clicked for ID:', id);
+
+    dispatch(getProductById(id))
+
+    setTimeout(() => {
+      navigate(`/proforma/${id}`);
+    }, 2500);
   };
 
   const handleDeleteClick = (id) => {

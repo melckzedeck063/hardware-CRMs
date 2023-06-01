@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 
 // import NavBar from '../navbar'
 import { set, useForm } from 'react-hook-form';
@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import image from '../../assets/images/clinton.png'
 import NavBar from '../containers/header';
 import SideNav from '../sideBar/sideNav';
-import { getProductById  } from '../../store/actions/product_actions';
+import { getAllProducts, getProductById  } from '../../store/actions/product_actions';
 
 import { useCart } from 'react-use-cart';
 import { saleNow } from '../../store/actions/sales_actions';
@@ -67,22 +67,24 @@ function ProformaPage() {
     const product =  useSelector(state => state.products);
     // console.log(product.current_product)
 
-    // console.log(productPrice);
+    // console.log(params.id);
     const { addItem } =  useCart();
 
-    setTimeout(() => {
-        if(reload < 5) {
-            setReload(reload => reload + 1)
-        }
-    }, 1000);
+    // setTimeout(() => {
+    //     if(reload < 5) {
+    //         setReload(reload => reload + 1)
+    //         dispatch( getProductById(params.id))
+    //     }
+    // }, 1500);
 
+    // useEffect(() => {
+    //     if(product  && reload < 4){
+    //         console.log('loaded again')
+    //         dispatch( getProductById(params.id) )
+    //     }
+    // },[params.id,product])
 
-
-    useEffect(() => {
-        if(product && product.current_product === null && reload < 3){
-            dispatch( getProductById(params.id) )
-        }
-    })
+    
 
     const { register, handleSubmit, reset, formState : {errors, isValid, isDirty, isSubmitSuccessful} } = useForm({
         mode: 'all',
@@ -134,10 +136,10 @@ function ProformaPage() {
       <>
           <div className='flex w-full justify-between'>
             <SideNav />
-          <div className='w-full'>
+          <div className='w-full' >
               <NavBar />
               <div className="bg-slate-50 py-10">
-                  <div className="mx-auto w-11/12 lg:w-8/12 xl:w-8/12">
+                  <div className="mx-auto w-10/12 lg:w-8/12 xl:w-8/12">
                       <div className="rounded-md shadow bg-white w-full">  
                           {
                             product?.current_product?.data?(
@@ -151,7 +153,7 @@ function ProformaPage() {
                             <div className="grid grid-cols-2 gap-1 w-full mx-auto mb-3">
                                       <div className="w-10/12 xsm:w-full sm:w-11/12 mx-auto">
                                     <label htmlFor="productName" className='text-sky-600'>Product Name</label> <br />
-                                          <input type="text" placeholder='productName'
+                                          <input type="text" placeholder='productName'  onClick={() => dispatch(getProductById(params.id))}
                                            className={`rounded-md w-11/12 border-2 focus:outline-none px-2 xl:py-2 lg:py-2 md:py-2 py-1 ${ errors.productName? "border-red-500" : "border-sky-500" }  `}
                                            defaultValue={product.current_product.data.productName}
                                            {...register("productName")}
